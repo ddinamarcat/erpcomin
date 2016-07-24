@@ -1,0 +1,977 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+/* Sistema desarrollado por Daniel Dinamarca Tosso - 2016 */
+/*
+Aqui definir colores corporativos
+
+Negro: rgb(37, 39, 41)
+*/
+
+/* Begin: Neutrality Principle Section */
+*,:after,:before{
+    box-sizing: border-box;
+}
+h1,h2,h3,h4,h5,h6{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    line-height: 1.1;
+    color: inherit;
+}
+
+body,ul,li,a,p,input,footer,h1,h2,table,tr,td,th,html,form,label,textarea{
+    font-family: 'Open Sans','Liberation Sans','Arial';
+    font-size:16px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 24px;
+    letter-spacing: 0px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary, h1, form, label,textarea {
+    display: block;
+}
+ul{
+    list-style-type: square;
+    list-style-position: inside;
+}
+/* End: Neutrality Principle Section */
+input{
+    font-weight: 400;
+}
+header{
+    top:0px;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    background: rgb(37, 39, 41);
+}
+body{
+    width:100%;
+    background: url("../../img/wh_logo_bg2.svg") repeat;
+}
+#header-grid{
+    position: relative;
+    width: 88%;
+    min-width: 1000px;
+    height: 100%;
+    margin: auto;
+}
+
+#logo{
+    position: absolute;
+    padding-top: 0.5%;
+    padding-left: 1%;
+    height:90%;
+}
+
+#top-menu{
+    background-color: inherit;
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 28%;
+    width: 59%;
+    height: 90%;
+}
+
+span.menu{
+    float: right;
+}
+.menum-activo{
+    background: yellow;
+}
+.menum-inactivo{
+    background: red;
+    display: none;
+}
+#top-menu > ul{
+    top:0px;
+    padding-top:0px;
+    margin-top: 0px;
+}
+#botones-menu-principal{
+    position:absolute;
+    height:inherit;
+}
+
+#botones-menu-principal > li > a::after{
+    width: 0;
+    height:15%;
+    content: "";
+    display: flex;
+    background-color: inherit;
+}
+
+
+#botones-menu-principal > li.actual > a::after{
+    width: inherit;
+    height:15%;
+    content: "";
+    display: flex;
+    background-color: rgb(94, 170, 232);
+}
+
+
+#botones-menu-principal > li{
+    display: inline-block;
+    color: rgb(155, 162, 174);
+    height: 36px;
+    margin: 13px 5px 0px 5px;
+    font-size: 18px;
+    background-color: inherit;
+    padding: 5px 12px;
+}
+
+#botones-menu-principal > li.no-actual:hover{
+    transition: 1s;
+    color: white;
+    background-color: rgb(94, 170, 232);
+}
+
+#botones-menu-principal > li > a{
+    color: inherit;
+    font-weight: 400;
+    font-size:15px;
+    text-decoration: none;
+}
+
+#botones-menu-principal > li > a:active{
+    color:#777777;
+}
+
+#login-button{
+    position: absolute;
+    font-size: 15px;
+    right: 1%;
+}
+.boton-verde{
+    background: rgb(147, 188, 118);
+    border-style: solid;
+    border: 0px;
+    border-color: rgb(127, 168, 98);
+    border-radius: 3px 3px 3px 3px;
+    padding: 5px 10px;
+    font-size: 15px;
+    margin: 16px 0 0 0;
+    color:rgb(255,255,255);
+}
+#contenido{
+    padding:0px;
+    position:relative;
+    margin:0px;
+    width: 100%;
+    min-width: 1200px;
+    min-height: 560px;
+    margin-bottom: 24px;
+}
+#contenido > section{
+    position:relative;
+}
+footer{
+    position: relative;
+    padding: 12px 0px;
+    width: 100%;
+    min-width: 1200px;
+    background-color: rgb(40, 44, 52);
+    text-align: center;
+    color:rgb(155, 162, 174);
+    top:70px;
+
+}
+footer > div{
+    width:1200px;
+    height:120px;
+    position: relative;
+    margin:0 auto;
+}
+footer > div > div{
+    position:absolute;
+    top:0px;
+}
+
+footer > div > div:nth-child(1){
+    left: 1%;
+}
+footer > div > div:nth-child(2){
+    left: 19%;
+    width: 3%;
+}
+footer > div > div:nth-child(3){
+    top:48%;
+    left: 24%;
+    width: 1.5%;
+}
+footer > div > div:nth-child(3) > p{
+    text-align: center;
+}
+footer > div > div:nth-child(4){
+    top:48%;
+    left: 25.4%;
+    width: 1.5%;
+}
+footer > div > div:nth-child(4) > p{
+    text-align: center;
+}
+footer > div > div:nth-child(5){
+    top:48%;
+    left: 27%;
+    width: 29%;
+}
+footer > div > div:nth-child(6){
+    left: 56%;
+    width: 1.5%;
+}
+footer > div > div:nth-child(7){
+    width: 42%;
+    top: 25%;
+    left: 57.5%;
+}
+footer > div > div:nth-child(7) > h3{
+    position: absolute;
+    width: 30%;
+    margin: 0;
+    top:20px;
+    left:0%;
+    text-align: center;
+}
+footer > div > div:nth-child(7) > input{
+    position: absolute;
+    top:26px;
+    left:30%;
+    display: inline-block;
+    border-radius: 8px;
+    font-size: 14px;
+    width: 70%;
+    padding: 0 9px;
+    height:28px;
+}
+footer > div > div:nth-child(7) > input:-webkit-input-placeholder{
+    color: black;
+    font-size: 10px;
+}
+footer > div > div > p{
+    height:20px;
+    text-align: left;
+    font-size: 14px;
+}
+
+#logo-footer{
+    margin:0px 130px 0px 0px;
+    height:50px;
+}
+.grid-content{
+    padding:0px;
+    color:rgb(235, 235, 235);
+    margin: 0px auto 0px auto;
+    width: 1200px;
+}
+
+.grid-content > h1{
+    text-align: center;
+    width:100%;
+    height:46px;
+    color: rgb(35, 35, 35);
+    padding:0px 0;
+    font-size: 46px;
+    margin: 90px auto 55px auto;
+}
+
+.grid-content > div{
+    width: 1200px;
+    color: inherit;
+    min-height: 100px;
+    display: block;
+    font-size: 0px;
+}
+
+.grid-cell{
+    vertical-align: top;
+    width: 22%;
+    color: inherit;
+    background-color: rgb(37, 39, 41);
+}
+.grid-cell > h2{
+    margin: 0;
+    padding-top:10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+    background-color: inherit;
+    letter-spacing: 2px;
+    color: inherit;
+}
+
+.grid-cell > ul:last-child{
+    margin: 0;
+    padding-bottom: 6px;
+    background-color: rgb(57, 59, 61);
+    padding:10px 5px;
+    color: inherit;
+}
+.grid-cell > ul > li{
+    margin: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    color: inherit;
+}
+.separador-vertical > div{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+.separador-vertical > div:first-child{
+    margin-top: 0px;
+}
+.equipo > ul{
+    display: block;
+    font-size: 0px;
+}
+.equipo > ul > li{
+    display: inline-block;
+    width: 19%;
+    margin: 10px 0.5%;
+    vertical-align: top;
+}
+.equipo > ul > li > div:first-child{
+    width: 80px;
+    height: 80px;
+    overflow:hidden;
+    border-radius: 40px;
+    margin: 0 auto;
+}
+.equipo > ul > li > div:nth-child(2){
+    width: 100%;
+    margin: 10px auto 0 auto;
+}
+.equipo > ul > li > div:nth-child(2) > p{
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+}
+.equipo > ul > li > div:nth-child(2) > p:first-child{
+    font-weight: 800;
+    letter-spacing: 1px;
+    font-size: 18px;
+}
+.equipo > ul > li > div:first-child > img{
+    height: 80px;
+}
+
+.miembros > ul{
+    display: block;
+    font-size: 0px;
+}
+.miembros > ul > li{
+    display: inline-block;
+    width: 19%;
+    margin: 10px 0.5%;
+    vertical-align: top;
+}
+.miembros > ul > li > a:first-child{
+    height: 80px;
+    overflow:hidden;
+    margin: 0 auto;
+}
+
+.miembros > ul > li > a:first-child > img{
+    height: 80px;
+    max-width: 100%;
+}
+
+.alianzas > ul{
+    display: block;
+    font-size: 0px;
+}
+.alianzas > ul > li{
+    display: inline-block;
+    width: 19%;
+    margin: 10px 0.5%;
+    vertical-align: top;
+}
+.alianzas > ul > li > a:first-child{
+    height: 80px;
+    overflow:hidden;
+    margin: 0 auto;
+}
+
+.alianzas > ul > li > a:first-child > img{
+    height: 80px;
+    max-width: 100%;
+}
+
+/***************************/
+.grid-cell{
+    display: inline-block;
+}
+.grid-cell > div{
+    height: 56px;
+    background-color: inherit;
+    color: inherit;
+}
+.grid-cell > div > h2:nth-child(1){
+    margin: auto 0;
+    width: 100%;
+    padding-top:10px;
+    text-align: center;
+    font-size: 20px;
+    letter-spacing: 2px;
+    font-kerning:auto;
+    font-weight: 800;
+    background-color: inherit;
+    color: inherit;
+}
+.grid-cell > div > h2:last-child{
+    letter-spacing: 2px;
+    font-size: 20px;
+    padding-top:18px;
+}
+.grid-cell > div > p:nth-child(2){
+    margin-top: -5px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: inherit;
+    color: inherit;
+}
+.separador {
+    top: 30px;
+}
+.separador > div{
+    top:30px;
+}
+.grid-size-4 > div > .grid-cell{
+    width: 23%;
+    margin: 10px 1%;
+}
+
+.grid-size-5 > div > .grid-cell{
+    width: 18%;
+    margin: 10px 1%;
+}
+.grid-size-1 > div > .grid-cell{
+    width: 98%;
+    margin: 10px 1%;
+}
+.cell-icon > div{
+    margin: 0;
+    padding-top:10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+    background-color: inherit;
+    letter-spacing: 2px;
+    color: inherit;
+    height: 150px;
+    padding-top:20px;
+    padding-bottom:20px;
+    font-size: 98px;
+}
+.cell-icon > div > img{
+    width: 90px;
+}
+.cell-icon:hover > div{
+    transform: rotateY(360deg);
+    transition: 1s;
+}
+
+.cell-icon > ul{
+    list-style: none;
+}
+.tipo-membresia{
+    width:25%;
+    height:100px;
+}
+
+
+
+#slogan{
+    position:relative;
+    top:0px;
+    padding-top:0px;
+    margin-top: 0px;
+    width: 100%;
+    height: 400px;
+    background: rgba(40, 44, 52, 0.6);
+}
+#slogan > ul{
+    width: 1000px;
+    top: 0px;
+    margin: 0 auto;
+    list-style-type: none;
+}
+#slogan > ul > li > h1{
+    color:rgb(235, 235, 235);
+    font-size: 46px;
+    width:74%;
+    margin:0 auto 0 auto;
+    padding-top: 11%;
+    text-align: center;
+}
+
+#slogan > ul > li > div > a{
+
+    color:rgb(235, 235, 235);
+    font-size: 16px;
+    width:inherit;
+    text-decoration: none;
+
+}
+#slogan > ul > li > div > a > p{
+    text-align: center;
+}
+
+
+#slogan > ul > li > div{
+    position: relative;
+    color:rgb(235, 235, 235);
+    width: 16.7%;
+    margin:5% auto 0 auto;
+}
+
+#slogan > ul > li > div > input{
+    position: relative;
+    color:rgb(190, 190, 245);
+    width: 100%;
+    font-size: 13px;
+    margin:0 auto;
+}
+
+.boton-slogan{
+    background: rgb(40, 40, 168);
+    border-style: solid;
+    border: 0px;
+    border-color: rgb(40, 40, 188);
+    border-radius: 5% 5% 5% 5%;
+    padding: 5% 2%;
+    font-size: 14px;
+    color:rgb(255,255,255);
+}
+
+.grid-couple{
+  background: inherit;
+  width: 100%;
+  height: 235px;
+  margin-top: 25px;
+}
+.grid-couple > div{
+  width: 1200px;
+  height: inherit;
+  position: relative;
+  margin: 0 auto;
+}
+
+.grid-couple h2{
+  font-weight: 600;
+  font-size: 35px;
+}
+
+.grid-couple h3{
+  font-weight: 600;
+  font-size: 23px;
+}
+
+.grid-couple span{
+  font-size: 12px;
+  margin-left: 30px;
+}
+.grid-couple p{
+  font-size: 14px;
+}
+
+.blackbg-white-box{
+  background: rgb(37, 39, 41);
+  color: rgb(215, 215, 215);
+}
+.whitebg-black-box{
+  background: rgb(215, 215, 215);
+  color: rgb(37, 39, 41);
+}
+.single-element span{
+  margin: 0;
+  font-size: 15px;
+}
+.single-element h3{
+  font-size: 25px;
+  margin-top:45px;
+  margin-bottom: 0;
+}
+.left-box-part{
+    left: 1%;
+    width: 49%;
+    height: inherit;
+    position:absolute;
+    padding: 30px;
+}
+.right-box-part{
+    left: 50%;
+    width: 49%;
+    height: inherit;
+    position:absolute;
+    padding: 30px;
+}
+.left-box{
+    width: 49%;
+    height: inherit;
+    position:absolute;
+    padding: 30px;
+}
+.right-box{
+    left:51%;
+    width: 49%;
+    height: inherit;
+    position:absolute;
+    padding: 30px;
+}
+
+.contenido-evento > article:hover{
+  cursor: pointer;
+}
+.contenido-evento > article > h3{
+    margin-top: 20px;
+    padding-right:30px;
+    font-size: 18px;
+    font-weight: 600;
+    overflow:hidden;
+    white-space:nowrap;
+    height: 24px;
+    line-height: 24px;
+    text-overflow: ellipsis;
+    position: relative;
+}
+.form-visita > .ubicacion-mapa{
+    padding:0px;
+}
+.form-visita > .ubicacion-mapa > div:first-child{
+    width:inherit;
+    background: rgb(37, 39, 41);
+    margin-bottom: 28px;
+}
+
+.form-visita > .ubicacion-mapa > div:first-child > h2{
+    width:inherit;
+}
+
+
+.form-visita{
+    background: rgb(57, 59, 61);
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.form-visita > div{
+    display: block;
+    height: 34px;
+    padding: 5px;
+}
+.form-visita > div:nth-child(10){
+    height: auto;
+}
+
+.form-visita > div:last-child{
+    height: auto;
+}
+.form-visita > div:last-child > button{
+    float:right;
+}
+
+.form-visita > div > input{
+    padding: 0 15px;
+    border-radius: 20px;
+    width: 360px;
+    margin-left: 10px;
+    display: inline-block;
+    background: rgb(67, 69, 71);
+    color: rgb(210, 210, 210);
+    border: 0px rgb(67, 69, 71) solid;
+}
+input:-webkit-autofill,input:-webkit-autofill:focus,input:-webkit-autofill:active{
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 0px 0px 10px rgb(67, 69, 71) inset;
+    background: rgb(67, 69, 71) !important;
+    -webkit-text-fill-color: rgb(210, 210, 210);
+    border: 0px rgb(67, 69, 71) solid !important;
+    outline-color: inherit !important;
+}
+.form-visita > div > input::-webkit-input-placeholder{
+    color: rgb(115, 115, 115);
+}
+
+.form-visita > div > textarea{
+    padding: 10px 15px;
+    border-radius: 20px;
+    width: 360px;
+    height: 190px;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: top;
+    background: rgb(67, 69, 71);
+    color: rgb(210, 210, 210);
+    resize: none;
+}
+.form-visita > div > textarea::-webkit-input-placeholder{
+    color: rgb(115, 115, 115);
+}
+.form-visita > .enviar-form{
+
+    height: 65px;
+}
+.form-visita > .enviar-form > button{
+    float:right;
+    margin-right: 17px;
+}
+.apellidop-form{
+}
+.apellidom-form{
+}
+.mail-form input:invalid{
+    background: rgb(100,30,30);
+}
+.mail-form input:valid{
+    background: rgb(30,100,30);
+}
+.cuentanos-form > div{
+}
+.form-visita > div > p > span{
+    color: #C11B17;
+}
+#calendar{
+}
+
+#toTop {
+  display: none;
+  text-decoration: none;
+  position: fixed;
+  bottom: 14px;
+  right: 3%;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border: none;
+  text-indent: 100%;
+  background: url("../../img/to-top-white.svg") no-repeat 0px 0px;
+}
+
+.c-desactivado{
+    top:-100px;
+    opacity: 0;
+    transition: 0.4s;
+}
+.c-activado{
+    top:70px;
+    opacity: 1;
+    transition: 0.4s;
+}
+#modal-form{
+    position:fixed;
+    z-index: 100;
+    width:100%;
+    height:100%;
+    top:0px;
+    left: 0px;
+    background: rgba(200,200,200,0.7);
+}
+#modal-form > div{
+    position:relative;
+    top:20%;
+    width:400px;
+    height:100%;
+    margin: 0 auto;
+}
+
+#modal-form > div > div{
+    position:absolute;
+    z-index: 200;
+    background-color: rgb(200,100,100);
+    width: 30px;
+    height: 30px;
+    border: 2px solid;
+    border-radius: 20px;
+    top:-12px;
+    right:-12px;
+}
+#modal-form > div > div > p{
+    color:white;
+    padding-top:0px;
+    font-size: 20px;
+    text-align: center;
+}
+.basic-form{
+    position:relative;
+    padding: 0px 0px 24px 0px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow:hidden;
+    border-radius: 10px;
+    background:  rgb(57, 59, 61);
+}
+
+.basic-form > div:first-child{
+    width:100%;
+}
+.basic-form > div{
+    padding: 5px 24px;
+    color:rgb(220,220,220);
+    background: rgb(57, 59, 61);
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+}
+
+.basic-form > div:first-child{
+    padding: 0;
+    margin-bottom:14px;
+}
+.login-form{
+    width: 400px;
+}
+.login-form > div:nth-child(2){
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    padding:0px;
+    margin: 32px auto 24px auto;
+    border-radius: 60px;
+}
+.login-form > div:nth-child(2) > img{
+    width: 120px;
+    height: 120px;
+}
+
+.basic-form h2{
+    display: inline-block;
+    width: inherit;
+    padding: 10px 10px;
+    color:rgb(220,220,220);
+    background: rgb(37, 39, 41);
+    font-weight: 800;
+    font-size: 18px;
+    text-align: center;
+}
+
+.basic-form input{
+    padding: 0 15px;
+    border-radius: 20px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    background: rgb(67, 69, 71);
+    color: rgb(210, 210, 210);
+}
+.basic-form input:-webkit-autofill{
+    color: rgb(67, 69, 71);
+}
+
+
+.basic-form input::-webkit-input-placeholder{
+    color: rgb(115, 115, 115);
+}
+
+.login-form button{
+    background: rgb(147, 188, 118);
+    border-style: solid;
+    width: 90%;
+    border: 0px;
+    border-color: rgb(127, 168, 98);
+    border-radius: 3px 3px 3px 3px;
+    padding: 5px 10px;
+    font-size: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    color:rgb(255,255,255);
+}
+
+.basic-form label{
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+    width: 270px;
+}
+.basic-form label > span{
+    color: #C11B17;
+}
+.hidden{
+    display: none;
+}
+
+@-moz-document url-prefix() {
+    .grid-cell > div > h2:last-child,.grid-cell > div > h2:nth-child(1),.cell-icon > div,.grid-cell > h2{
+        letter-spacing: 1px;
+    }
+}
+
+/*eventos*/
+.eventos{
+    background: white;
+}
+.eventos > div{
+    background: rgb(147, 188, 118);
+}
+.eventos > ul:last-child{
+    font-size: 0px;
+    background: rgb(215, 215, 215);
+    padding-left: 26px;
+    padding-right: 26px;
+}
+.eventos > ul > li{
+    display: block;
+    background: rgb(200, 200, 200);
+    color: rgb(37, 39, 41);
+    list-style: none;
+    margin: 16px 0px;
+    padding: 20px 0px;
+}
+.eventos > ul > li > div{
+    height: 200px;
+    display: inline-block;
+}
+.eventos > ul > li > div:first-child{
+    width: 162px;
+    overflow:hidden;
+    margin: 0 auto;
+    padding-left: 20px;
+    text-align: left;
+    float:left;
+}
+
+.eventos > ul > li > div:first-child > img{
+    height: 200px;
+    max-width: 100%;
+}
+.eventos > ul > li > div:nth-child(2){
+    width: 926px;
+}
+.eventos > ul > li > div:nth-child(2) > ul{
+    margin-right: 20px;
+    text-align: left;
+}
+
+.eventos h3{
+    margin-top: 0px;
+    text-align: left;
+    font-size: 20px;
+}
+.eventos input{
+    background: rgb(40, 40, 168);
+    color: rgb(190, 190, 245);
+    font-weight: 400;
+    margin: 10px 0 0 0px;
+    padding: 5px 10px;
+    float:left;
+    border: 1px solid rgb(40, 40, 188);;
+    border-radius: 4px;
+}
+#contenido-ad.anim-out{
+    opacity: 0;
+    transition: 0.4s;
+}
+#contenido-ad.anim-in{
+    opacity: 1;
+    transition: 0.4s;
+}

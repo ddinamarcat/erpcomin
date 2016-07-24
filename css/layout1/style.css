@@ -1,0 +1,322 @@
+@charset "UTF-8";
+/* Sistema desarrollado por Daniel Dinamarca Tosso - 2016 */
+/*
+Aqui definir colores corporativos
+
+Negro: rgb(37,39,41)
+Amarillo: rgb(255,221,0)
+*/
+
+/* Begin: Neutrality Principle Section */
+*,:after,:before{
+    box-sizing: border-box;
+}
+h1,h2,h3,h4,h5,h6{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    line-height: 29px;
+    color: inherit;
+}
+
+body,ul,li,a,p,input,footer,h1,h2,table,tr,td,th,html,form,label,textarea{
+    font-family: "Times New Roman", 'Times', 'serif';
+    font-size:16px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 29px;
+    letter-spacing: 0px;
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    outline: none;
+}
+@-moz-document url-prefix() {
+    body,ul,li,a,p,input,footer,h1,h2,table,tr,td,th,html,form,label,textarea{
+        letter-spacing: -0.1px;
+    }
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary, h1, form, label,textarea {
+    display: block;
+}
+ul{
+    list-style-type: square;
+    list-style-position: inside;
+}
+li{
+    line-height: 24px;
+}
+/* End: Neutrality Principle Section */
+input{
+    font-weight: 400;
+}
+header{
+    top:0px;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    background: rgb(37,39,41);
+}
+body{
+    width:100%;
+    background: rgba(200,200,200,0.7);
+}
+.hidden{
+    display: none;
+}
+#header-grid{
+    display: block;
+    width: 1240px;
+    height: 70px;
+    margin: 0px auto;
+    font-size: 0px;
+}
+#header-grid > div{
+    display: inline-block;
+    vertical-align: middle;
+}
+#header-grid > div:first-child{
+    height:64px;
+    width: 277px;
+}
+#header-grid > div:first-child > a{
+    height:inherit;
+}
+
+#header-grid > div:first-child > a > img{
+    height:inherit;
+}
+
+#header-grid > div:nth-child(2){
+    width:20px;
+    height:70px;
+}
+
+#header-grid >  div:nth-child(3){
+    width:892px;
+}
+
+#header-grid >  div:nth-child(4){
+    width:50px;
+    height:30px;
+}
+
+#top-menu{
+    background-color: inherit;
+    height:26px;
+}
+
+#top-menu > ul{
+    top:0px;
+    padding-top:0px;
+    margin-top: 0px;
+}
+span.menu{
+    display: none;
+}
+#login-button{
+    font-size: 10px;
+    background-color: rgb(255,221,0);
+    letter-spacing: 1px;
+    color: rgb(37,39,41);
+    width: inherit;
+    height: inherit;
+    transition: 0.6s;
+}
+
+#login-button:hover{
+    background: rgb(150,120,0);
+    transition: 0.6s;
+    cursor: pointer;
+}
+#botones-menu-principal > li > a::after{
+    width: 0;
+    height:15%;
+    content: "";
+    display: flex;
+    background-color: inherit;
+}
+
+
+#botones-menu-principal > li.actual > a::after{
+    width: inherit;
+    height:15%;
+    content: "";
+    display: flex;
+    background-color: rgb(255,221,0);
+}
+
+
+#botones-menu-principal > li{
+    display: inline-block;
+    color: rgb(155, 162, 174);
+    height: 26px;
+    font-size: 18px;
+    background-color: inherit;
+    padding: 0px 12px;
+}
+
+#botones-menu-principal > li.no-actual:hover{
+    transition: 1s;
+    color: rgb(37,39,41);
+    background-color: rgb(255,221,0);
+}
+
+#botones-menu-principal > li > a{
+    color: inherit;
+    font-weight: 400;
+    font-size:15px;
+    text-decoration: none;
+}
+
+#botones-menu-principal > li > a:active{
+    color:#777777;
+}
+#modal-form{
+    position: absolute;
+    width:100%;
+    height:100%;
+    top:0px;
+    left: 0px;
+}
+#modal-form > div{
+    position:relative;
+    top:20%;
+    width:400px;
+    height:100%;
+    margin: 0 auto;
+}
+#modal-form > div > form > div > h2{
+    font-weight: 600;
+    color: rgb(50,82,99);
+}
+#modal-form > div > form > div > button{
+    cursor: pointer;
+}
+#modal-form > div > form > div > input{
+    border: 1px solid black;
+    margin: 1px;
+    padding-left: 5px;
+}
+#resumen{
+
+}
+
+#consultas{
+    display: block;
+    margin: 0 auto;
+    width: 98%;
+    background: inherit;
+}
+#consultas > #consulta-tabla{
+    position: relative;
+    margin: 0 auto;
+    background: rgb(200,200,200);
+    width: 98%;
+}
+#consultas > #consulta-tabla > div{
+    position: relative;
+    margin: 0 auto;
+    background: inherit;
+    width: 98%;
+}
+#consultas > #consulta-tabla > div > h2{
+    margin: 0 auto;
+    padding-top: 5px;
+    background: inherit;
+    width: 40%;
+    text-align: center;
+    color: rgb(50,82,99);
+    font-size: 15px;
+    font-weight: 800;
+}
+#alertas{
+    background: inherit;
+}
+#graficos{
+    background: inherit;
+}
+#contenido{
+    padding: 0px;
+    position: relative;
+    margin: 0px;
+    width: 100%;
+    min-width: 1280px;
+    min-height: 560px;
+    margin-bottom: 10px;
+}
+#contenido > section{
+    position:relative;
+}
+#toTop {
+  display: none;
+  text-decoration: none;
+  position: fixed;
+  bottom: 14px;
+  right: 3%;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  border: none;
+  text-indent: 100%;
+  background: url("../../img/to-top-white.svg") no-repeat 0px 0px;
+  z-index: 101;
+}
+.c-activado {
+    top: 70px;
+    opacity: 1;
+    transition: 0.4s;
+}
+.c-desactivado{
+    top:-100px;
+    opacity: 0;
+    transition: 0.4s;
+}
+.tabla1{
+    background: inherit;
+}
+.tabla1 > div:first-child{
+    background: inherit;
+}
+.tabla1 > div:first-child > div:nth-of-type(1){
+    height: 100px;
+}
+.tabla1 > div:first-child > div:nth-of-type(1) > select{
+    display: inline-block;
+    font-size: 18px;
+}
+.tabla1 > div:first-child > div:nth-of-type(1) > select > option{
+    background: rgb(190,190,190);
+    color: rgb(37,39,41);
+    transition: 1s;
+    list-style-type: none;
+    margin-left: 12px;
+    cursor: pointer;
+}
+.tabla1 > div:first-child > div:nth-of-type(1) > input{
+    font-size: 20px;
+    background-color: rgb(255,221,0);
+    color: rgb(37,39,41);
+    transition: 0.6s;
+    width: 150px;
+    height: 40px;
+    border-radius: 12px;
+    padding: 3px 5px;
+}
+.tabla1 > div:first-child > div:nth-of-type(1) > input:hover{
+    cursor: pointer;
+    background: rgb(150,120,0);
+    transition: 0.6s;
+}
+.tabla1 > div:nth-child(2) > p > span{
+    font-weight: 700;
+}
+.tabla1 > div:nth-child(2){
+    margin-top: 10px;
+    background: red;
+}
+#contenido-query{
+
+}

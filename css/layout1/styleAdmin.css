@@ -1,0 +1,56 @@
+@charset "UTF-8";
+@import url("style.css");
+/* Sistema desarrollado por Daniel Dinamarca Tosso - 2016 */
+/*
+Aqui definir colores corporativos
+
+Negro: rgb(37, 39, 41)
+*/
+
+/* Begin: Neutrality Principle Section */
+#top-menu{
+    margin-left: 18%;
+}
+.tipo-usuario{
+    position: absolute;
+    display: block;
+    width: 26%;
+    top:22px;
+    left:74%;
+    font-size: 0px;
+}
+.tipo-usuario > div{
+    display: inline-block;
+    vertical-align:middle;
+}
+.tipo-usuario > div:first-child{
+    width: 270px;
+}
+.tipo-usuario > div:first-child > p{
+    width: 270px;
+    color: rgb(240,240,240);
+    font-size: 12px;
+}
+.tipo-usuario > div:last-child{
+    background-color: rgb(200,100,100);
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.tipo-usuario > div:last-child > div {
+    width: 20px;
+    height: 20px;
+    margin-top: -4px;
+    margin-left: -2px;
+}
+
+.tipo-usuario > div:last-child > div > p{
+    background-color: inherit;
+    color: rgb(240,240,240);
+    font-size: 14px;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
