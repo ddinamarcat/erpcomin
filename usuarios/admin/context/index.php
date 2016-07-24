@@ -24,14 +24,14 @@
     <!-- Script para volver arriba -->
 	<script type="text/javascript" src="js/move-top.js"></script>
     <script type="text/javascript" src="js/easing.js"></script>
-
+    <!-- para flecha de vuelta hacia arriba e inicia contextManager -->
     <script type="text/javascript">
     	jQuery(document).ready(function($) {
     			$(".scroll").click(function(event){
     					event.preventDefault();
     					$('html,body').animate({scrollTop:$(this.hash).offset().top},9000);
     			});
-                $().UItoTop({ easingType: 'easeOutQuart' });//para flecha de vuelta hacia arriba
+                $().UItoTop({ easingType: 'easeOutQuart' });
     			contextManager.start("contenido");
 
     	});
