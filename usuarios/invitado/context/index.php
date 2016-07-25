@@ -25,7 +25,7 @@
 <header>
     <div id="header-grid">
         <div>
-            <img id="logo" src="img/logo.png" alt="COMIN Logo"/>
+            <img templateId="c-principal" id="logo" src="img/logo.png" alt="COMIN Logo"/>
         </div>
         <div>
             <span class="menu"><img src="img/nav.svg" alt="" onclick="menuHandler()"/></span>

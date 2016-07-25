@@ -1,4 +1,3 @@
-<? $markquery="markquery"; ?>
 <section id="consultas">
     <section id="consulta-tabla">
         <div>
@@ -14,29 +13,21 @@
                 <div>
                     <select name="markquery" id="querytable">
                         <?php
-                            include("config.php");
-                            $tableList = array();
-                            $conn = mysqli_connect($hostdb, $userdb, $passdb, $namedb);
-                            $sql = "SHOW FULL TABLES FROM ".$namedb;
-                            $res = mysqli_query($conn,$sql);
-                            while ($fila = mysqli_fetch_row($res)) {
-                                //echo "<li>{$fila[0]}</li>\n";
-                                array_push($tableList, $fila[0]);
-                            }
-                            $largo = count($tableList);
+                            $query = new Consulta();
+                            $tablas = $query->mostrarTablas();
+                            $largo = count($tablas);
                             for($i=0; $i<$largo; $i++){
-                                echo "<option value='".$i."'>".$tableList[$i]."</li>";
+                                echo "<option value='".$i."'>".$tablas[$i]."</li>";
                             }
-                            mysqli_close($conn);
                         ?>
                     </select>
-                    <input type="button" value="Desplegar Tabla" onclick="queryManager.getTable();">
+                    <input id="btn-query" type="button" value="Desplegar Tabla" onclick="queryManager.getTable();">
                 </div>
                 <div>
 
                 </div>
             </div>
-            <div>
+            <div id="mensaje-query">
                 <p>Consulta: <span>SELECT * FROM erpcomin.unitario</span></p>
             </div>
             <div id="contenido-query">
