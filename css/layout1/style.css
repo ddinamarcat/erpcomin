@@ -320,3 +320,14 @@ span.menu{
 #contenido-query{
 
 }
+
+.anim-out{
+    opacity: 0;
+    transition: 0.6s;
+    background: green;
+}
+.anim-in{
+    opacity: 1;
+    transition: 0.6s;
+    background: red;
+}

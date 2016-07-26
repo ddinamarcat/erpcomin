@@ -3,32 +3,42 @@ var queryManager = {
         var tabla = document.getElementById("querytable");
         var nombreTabla = tabla.options[tabla.selectedIndex].text;
 
-        //selectManager(nombreTabla);
-        /*
-        var r = new XMLHttpRequest();
-        r.open("POST", "controllers/admin/Select.php", true);
-        r.onreadystatechange = function () {
-        	if (r.readyState != 4 || r.status != 200) return;
-        	console.log("success!!!");
-        };
-        r.send(nombreTabla);
-        console.log(r);*/
-
         var ajaxRequest= $.ajax({
-            url: "controllers/admin/Select.php",
-            type: "post",
-            data: nombreTabla,
+            type: "POST",
+            data: {'table': nombreTabla},
+            url: 'controllers/admin/Select.php',
             success: function(response){
-                var consulta = response;
-                //window.alert(consulta);
-                /*obj = JSON.parse(decodeURI(consulta));
-                console.log(obj);*/
+                var jdata = JSON.parse(decodeURI(response));
+                //window.alert(jdata);
+                var wrap = document.getElementById("contenido-query").firstElementChild;
+                wrap.classList.remove("anim-in");
+                wrap.classList.add("anim-out");
+                window.setTimeout(function(){
+                    wrap.innerHTML = jdata;
+                    /*
+                    for(var i=0; i<jdata[1].length; i++){
+                        if(i==0){
+                            wrap.appendChild(document.createElement("div"));
+                            wrap.firstElementChild.classList.add("table-titles");
+                        }else{
+                            wrap.appendChild(document.createElement("div"));
+                        }
+                        for(var j=0; j<jdata[0]; j++){
+                            window.alert(j);
+                        }
+                    }*/
+
+                    wrap.classList.remove("anim-out");
+                    wrap.classList.add("anim-in");
+                },400);
+                /*
+                for(var i=0; i<jdata[0].length; i++){
+                    contenedor.innerHTML = contenedor.innerHTML + jdata[0][i]+" ";
+                }*/
+
             }
         });
 
 
-        var contenedor = document.getElementById("contenido-query");
-        //var query = JSON.parse(decodeURI('ajaxRequest'));
-        //console.log(JSON.stringify(ajaxRequest));
     }
 }

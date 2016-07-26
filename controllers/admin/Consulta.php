@@ -1,6 +1,5 @@
 <?php
 
-
 class Consulta{
     public $conn;
     public $sql;

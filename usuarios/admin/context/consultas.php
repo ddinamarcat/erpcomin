@@ -30,8 +30,8 @@
             <div id="mensaje-query">
                 <p>Consulta: <span>SELECT * FROM erpcomin.unitario</span></p>
             </div>
-            <div id="contenido-query">
-
+            <div id="resultado-query">
+                <?php include_once("view/selectAll.php"); ?>
             </div>
         </div>
     </section>
