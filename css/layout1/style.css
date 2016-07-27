@@ -5,6 +5,9 @@ Aqui definir colores corporativos
 
 Negro: rgb(37,39,41)
 Amarillo: rgb(255,221,0)
+Amarillo-oscuro(login-button:hover): rgb(150,120,0)
+Gris (letra menu-principal): rgb(155, 162, 174)
+Blanco (Background principal): rgba(200,200,200,0.7)
 */
 
 /* Begin: Neutrality Principle Section */
@@ -108,7 +111,7 @@ body{
     height:26px;
 }
 
-#top-menu > ul{
+#top-menu > div{
     top:0px;
     padding-top:0px;
     margin-top: 0px;
@@ -138,8 +141,6 @@ span.menu{
     display: flex;
     background-color: inherit;
 }
-
-
 #botones-menu-principal > li.actual > a::after{
     width: inherit;
     height:15%;
@@ -147,18 +148,23 @@ span.menu{
     display: flex;
     background-color: rgb(255,221,0);
 }
-
-
 #botones-menu-principal > li{
     display: inline-block;
+    position: relative;
+    vertical-align: top;
     color: rgb(155, 162, 174);
     height: 26px;
     font-size: 18px;
     background-color: inherit;
-    padding: 0px 12px;
+    padding: 0px 15px;
 }
 
 #botones-menu-principal > li.no-actual:hover{
+    transition: 1s;
+    color: rgb(37,39,41);
+    background-color: rgb(255,221,0);
+}
+#botones-menu-principal > li.actual:hover{
     transition: 1s;
     color: rgb(37,39,41);
     background-color: rgb(255,221,0);
@@ -169,11 +175,50 @@ span.menu{
     font-weight: 400;
     font-size:15px;
     text-decoration: none;
+    display: block;
+    width: 100px;
 }
 
 #botones-menu-principal > li > a:active{
     color:#777777;
 }
+#botones-menu-principal > li > ul{
+    display: none;
+    position: absolute;
+    width: inherit;
+    opacity: 0;
+}
+#botones-menu-principal > li:hover > ul{
+    display: block;
+    opacity: 1;
+    z-index: 1;
+}
+#botones-menu-principal > li > ul > li{
+    position: relative;
+    right: 15px;
+    top: 15px;
+    cursor: pointer;
+    list-style-type: none;
+    background: rgb(37,39,41);
+    padding: 5px 15px;
+    color: rgb(155, 162, 174);
+    width: 200px;
+}
+#botones-menu-principal > li > ul > li > a{
+    text-decoration: none;
+}
+#botones-menu-principal > li > ul > li > a:visited{
+    text-decoration: none;
+    color: rgb(155, 162, 174);
+}
+#botones-menu-principal > li > ul > li:hover{
+    transition: 1s;
+    background-color: rgb(255,221,0);
+}
+#botones-menu-principal > li > ul > li:hover > a{
+    color: rgb(37,39,41);
+}
+
 #modal-form{
     position: absolute;
     width:100%;
@@ -200,9 +245,6 @@ span.menu{
     margin: 1px;
     padding-left: 5px;
 }
-#resumen{
-
-}
 
 #consultas{
     display: block;
@@ -213,7 +255,7 @@ span.menu{
 #consultas > #consulta-tabla{
     position: relative;
     margin: 0 auto;
-    background: rgb(200,200,200);
+    background: inherit;
     width: 98%;
 }
 #consultas > #consulta-tabla > div{
@@ -223,6 +265,34 @@ span.menu{
     width: 98%;
 }
 #consultas > #consulta-tabla > div > h2{
+    margin: 0 auto;
+    padding-top: 5px;
+    background: inherit;
+    width: 40%;
+    text-align: center;
+    color: rgb(50,82,99);
+    font-size: 15px;
+    font-weight: 800;
+}
+#control-costos{
+    display: block;
+    margin: 0 auto;
+    width: 98%;
+    background: inherit;
+}
+#control-costos > #consulta-tabla{
+    position: relative;
+    margin: 0 auto;
+    background: inherit;
+    width: 98%;
+}
+#control-costos > #consulta-tabla > div{
+    position: relative;
+    margin: 0 auto;
+    background: inherit;
+    width: 98%;
+}
+#control-costos > #consulta-tabla > div > h2{
     margin: 0 auto;
     padding-top: 5px;
     background: inherit;
@@ -315,19 +385,14 @@ span.menu{
 }
 .tabla1 > div:nth-child(2){
     margin-top: 10px;
-    background: red;
-}
-#contenido-query{
-
+    background: inherit;
 }
 
 .anim-out{
     opacity: 0;
     transition: 0.6s;
-    background: green;
 }
 .anim-in{
     opacity: 1;
     transition: 0.6s;
-    background: red;
 }

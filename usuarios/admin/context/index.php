@@ -63,12 +63,20 @@ include_once('controllers/admin/Consulta.php');
         </div>
         <div>
             <nav id="top-menu" class="menum-inactivo" >
-                <ul id="botones-menu-principal">
-                    <li class="actual main-menu-element" templateId="c-principal" mark="1">
+                <div id="botones-menu-principal">
+                    <li class="no-actual main-menu-element" templateId="c-principal" mark="1">
                         <a href="#">Resumen</a>
                     </li>
                     <li class="no-actual main-menu-element" templateId="c-consultas" mark="1">
                         <a href="#">Consultas</a>
+                        <ul class="no-actual">
+                            <li class="no-actual main-menu-element" templateId="c-controlCostos" mark="1"><a href="#">Control de Costos</a>
+                            </li>
+                            <li class="no-actual main-menu-element" templateId="c-rrhh" mark="1"><a href="#">RRHH</a>
+                            </li>
+                            <li class="no-actual main-menu-element" templateId="c-bodega" mark="1"><a href="#">Bodega</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="no-actual main-menu-element" templateId="c-alertas" mark="1">
                         <a href="#">Alertas</a>
@@ -76,7 +84,7 @@ include_once('controllers/admin/Consulta.php');
                     <li class="no-actual main-menu-element" templateId="c-graficos" mark="1">
                         <a href="#">Gr&aacute;ficos</a>
                     </li>
-                </ul>
+                </div>
             </nav>
         </div>
         <div>
@@ -91,6 +99,15 @@ include_once('controllers/admin/Consulta.php');
 </template>
 <template id="tc-consultas">
 	<?php include_once("usuarios/admin/context/consultas.php"); ?>
+</template>
+<template id="tc-controlCostos">
+	<?php include_once("usuarios/admin/context/controlCostos.php"); ?>
+</template>
+<template id="tc-rrhh">
+	<?php include_once("usuarios/admin/context/rrhh.php"); ?>
+</template>
+<template id="tc-bodega">
+	<?php include_once("usuarios/admin/context/bodega.php"); ?>
 </template>
 <template id="tc-alertas">
 	<?php include_once("usuarios/admin/context/alertas.php"); ?>

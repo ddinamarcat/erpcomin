@@ -40,5 +40,8 @@ var queryManager = {
         });
 
 
+    },
+    controlCostoPrimera: function(){
+        
     }
 }

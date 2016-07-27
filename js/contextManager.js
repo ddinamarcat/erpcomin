@@ -112,7 +112,7 @@ var contextManager = {
         cm.changeHash(newHashL,1);
         window.onhashchange = function(){
             var hashL = window.location.hash;
-            if(hashL.length > 0) cm.changeContext(hashL.substring(1),1);
+            if(hashL.length > 0 && newHashL!=window.location.hash) cm.changeContext(hashL.substring(1),1);
         }
     }
 };
