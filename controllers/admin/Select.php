@@ -33,5 +33,5 @@
     $returned = array($fieldnames, $data);
 
     MostrarTabla::muestraConsulta($returned);
-
+    mysqli_close($conn);
 ?>

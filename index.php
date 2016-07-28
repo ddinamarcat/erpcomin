@@ -1,5 +1,5 @@
 <?php
-    error_reporting(E_STRICT);
+    error_reporting(E_ALL);
     ini_set('display_errors',1);
     header('Content-Type: text/html; charset=utf-8');
     include_once('config.php');
@@ -8,6 +8,9 @@
     include_once("controllers/admin/Consulta.php");
     include_once("controllers/admin/MostrarTabla.php");
     include_once("controllers/admin/Select.php");
+    include_once("controllers/admin/ExcelToPHP/PHPExcel.php");
+    include_once("controllers/admin/ExcelToPHP/PHPExcel/Calculation.php");
+    include_once("controllers/admin/ExcelToPHP/PHPExcel/Cell.php");
     include_once('SessionManager.php');
     $sessionManager = new SessionManager();
 ?>
