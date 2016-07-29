@@ -27,12 +27,35 @@ $objReader->setReadDataOnly(true);
 
    To reset this option to the default, you can call the setLoadAllSheets() method
 */
-$objReader->setLoadSheetsOnly(["Hoja1","Hoja2"]);
+$objReader->setLoadSheetsOnly("Hoja1");
 // Load $inputFileName to a PHPExcel Object
 $objPHPExcel = $objReader->load($inputFileName);
+//$sheet = $objPHPExcel->getSheetByName("Hoja1");
+$rowIterator = $objPHPExcel->getSheetByName("Hoja1")->getRowIterator();
 
+$array_data = array();
 
-//var_dump($objPHPExcel);
+foreach($rowIterator as $row){
+    $cellIterator = $row->getCellIterator();
+    $cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+    //if(1 == $row->getRowIndex ()) continue;//skip first row
+    $rowIndex = $row->getRowIndex ();
+    $array_data[$rowIndex] = array('A'=>'', 'B'=>'','C'=>'','D'=>'');
+
+    foreach ($cellIterator as $cell) {
+        if('A' == $cell->getColumn()){
+            $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
+        } else if('B' == $cell->getColumn()){
+            $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
+        } else if('C' == $cell->getColumn()){
+            $array_data[$rowIndex][$cell->getColumn()] = PHPExcel_Style_NumberFormat::toFormattedString($cell->getCalculatedValue(), 'YYYY-MM-DD');
+        } else if('D' == $cell->getColumn()){
+            $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
+        }
+    }
+}
+print $array_data[1];
+
 
 
 
