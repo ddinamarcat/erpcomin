@@ -3,9 +3,9 @@
     $tablasel = $_POST["table"];
     $conn = mysqli_connect("localhost","cominerp2016","_ERP_COMIN16_","erpcomin");
     mysqli_set_charset($conn,"utf8");
-    //$tablasel = "item";
+    //$tablasel = "ordendecompra";
 
-    $query = "SELECT * FROM ".$tablasel;
+    $query = "SELECT * FROM ".$tablasel." WHERE codigoprodserv='87'";
     $consulta = mysqli_query($conn,$query);
     $fields = mysqli_fetch_fields($consulta);
     $num_cols = mysqli_num_fields($consulta);

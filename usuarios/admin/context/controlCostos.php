@@ -31,7 +31,7 @@
                 <!-- <p>Consulta: <span>SELECT * FROM erpcomin.unitario</span></p> -->
             </div>
             <div id="resultado-query">
-                <?php include_once("view/selectAll.php"); ?>
+                <?php include_once("view/selectAll.php");?>
             </div>
         </div>
     </section>

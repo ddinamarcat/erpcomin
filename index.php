@@ -8,6 +8,7 @@
     include_once("controllers/admin/Consulta.php");
     include_once("controllers/admin/MostrarTabla.php");
     include_once("controllers/admin/Select.php");
+    include_once("controllers/admin/CheckSerialize.php");
     include_once('SessionManager.php');
     $sessionManager = new SessionManager();
 ?>

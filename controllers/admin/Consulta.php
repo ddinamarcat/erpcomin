@@ -13,6 +13,11 @@ class Consulta{
 
     public function mostrarTablas(){
         include("config.php");
+        if($this->conn){
+            $this->sql = "SELECT DISTINCT descpprodserv,cantidadoc,valunitarionetoorigen"
+        }
+
+        /*
 		if($this->conn){
 			$this->sql = "SHOW FULL TABLES FROM ".$namedb;
             $this->res = mysqli_query($this->conn,$this->sql);
@@ -23,7 +28,7 @@ class Consulta{
 
             mysqli_close($this->conn);
             return $this->tableList;
-		}
+		}*/
 	}
 
     public function selectTabla($query){

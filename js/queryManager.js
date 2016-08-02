@@ -15,18 +15,6 @@ var queryManager = {
                 wrap.classList.add("anim-out");
                 window.setTimeout(function(){
                     wrap.innerHTML = jdata;
-                    /*
-                    for(var i=0; i<jdata[1].length; i++){
-                        if(i==0){
-                            wrap.appendChild(document.createElement("div"));
-                            wrap.firstElementChild.classList.add("table-titles");
-                        }else{
-                            wrap.appendChild(document.createElement("div"));
-                        }
-                        for(var j=0; j<jdata[0]; j++){
-                            window.alert(j);
-                        }
-                    }*/
 
                     wrap.classList.remove("anim-out");
                     wrap.classList.add("anim-in");
@@ -42,6 +30,6 @@ var queryManager = {
 
     },
     controlCostoPrimera: function(){
-        
+
     }
 }
