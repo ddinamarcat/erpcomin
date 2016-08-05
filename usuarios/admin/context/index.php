@@ -115,7 +115,7 @@ include_once('controllers/admin/Consulta.php');
 <template id="tc-graficos">
 	<?php include_once("usuarios/admin/context/graficos.php"); ?>
 </template>
-</body>
 
 <a href="#to-top" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+</body>
 </html>

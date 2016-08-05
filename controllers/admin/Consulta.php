@@ -4,31 +4,35 @@ class Consulta{
     public $conn;
     public $sql;
     public $res;
-    public $tableList = array(); //tablas de la BD
+    public $prodServ = array(); //Array con prodCod y con prodServ
 
     public function __construct(){
         include("config.php");
         $this->conn = mysqli_connect($hostdb,$userdb,$passdb,$namedb);
+        mysqli_set_charset($this->conn,"utf8");
 	}
 
-    public function mostrarTablas(){
+    public function mostrarProdServ(){
         include("config.php");
-        if($this->conn){
-            $this->sql = "SELECT DISTINCT descpprodserv,cantidadoc,valunitarionetoorigen"
-        }
 
-        /*
-		if($this->conn){
-			$this->sql = "SHOW FULL TABLES FROM ".$namedb;
+        if($this->conn){
+            $this->sql = "SELECT codigoprodserv,descpprodserv FROM ordendecompra GROUP BY codigoprodserv ORDER BY descpprodserv";
+
             $this->res = mysqli_query($this->conn,$this->sql);
-            while ($fila = mysqli_fetch_row($this->res)) {
-                array_push($this->tableList, $fila[0]);
+            
+            while ($fila = mysqli_fetch_row($this->res)){
+                $temp = array();
+                $temp[0] = utf8_decode($fila[0]);
+                $temp[1] = utf8_decode($fila[1]);
+                array_push($this->prodServ,$temp);
+                unset($temp);
+
             }
-            $largo = count($this->tableList);
 
             mysqli_close($this->conn);
-            return $this->tableList;
-		}*/
+            return $this->prodServ;
+
+        }
 	}
 
     public function selectTabla($query){

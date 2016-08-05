@@ -247,10 +247,14 @@ span.menu{
 }
 
 #consultas{
-    display: block;
+    display: inline-block;
     margin: 0 auto;
     width: 98%;
     background: inherit;
+}
+#consulta-tabla{
+    display: block;
+    margin: 0 auto;
 }
 #consultas > #consulta-tabla{
     position: relative;
@@ -259,6 +263,7 @@ span.menu{
     width: 98%;
 }
 #consultas > #consulta-tabla > div{
+    display: inline-block;
     position: relative;
     margin: 0 auto;
     background: inherit;
@@ -281,13 +286,13 @@ span.menu{
     background: inherit;
 }
 #control-costos > #consulta-tabla{
-    position: relative;
+    display: block;
     margin: 0 auto;
     background: inherit;
     width: 98%;
 }
 #control-costos > #consulta-tabla > div{
-    position: relative;
+    display: block;
     margin: 0 auto;
     background: inherit;
     width: 98%;
@@ -309,16 +314,18 @@ span.menu{
     background: inherit;
 }
 #contenido{
+    position:absolute;
     padding: 0px;
-    position: relative;
-    margin: 0px;
+    margin: 0 auto;
     width: 100%;
     min-width: 1280px;
     min-height: 560px;
     margin-bottom: 10px;
 }
+
 #contenido > section{
-    position:relative;
+    display: block;
+    margin: 0 auto;
 }
 #toTop {
   display: none;
@@ -334,6 +341,7 @@ span.menu{
   background: url("../../img/to-top-white.svg") no-repeat 0px 0px;
   z-index: 101;
 }
+
 .c-activado {
     top: 70px;
     opacity: 1;
@@ -345,18 +353,24 @@ span.menu{
     transition: 0.4s;
 }
 .tabla1{
+    display: inline-block;
+    margin: 0 auto;
     background: inherit;
 }
 .tabla1 > div:first-child{
     background: inherit;
 }
-.tabla1 > div:first-child > div:nth-of-type(1){
-    height: 100px;
+.tabla1 > div:first-child > div:nth-of-type(1) > div:nth-of-type(1){
+    display: block;
+    font-size: 18px;
+    background: magenta;
+    height: auto;
 }
 .tabla1 > div:first-child > div:nth-of-type(1) > select{
-    display: inline-block;
+    display: block;
     font-size: 18px;
 }
+
 .tabla1 > div:first-child > div:nth-of-type(1) > select > option{
     background: rgb(190,190,190);
     color: rgb(37,39,41);
@@ -395,4 +409,169 @@ span.menu{
 .anim-in{
     opacity: 1;
     transition: 0.6s;
+}
+#contenido-query{
+    width: 1244px;
+    display: inline-block;
+    padding: 6px 4px;
+    margin: 0 auto;
+
+}
+.wrap-table{
+    display:inline-block;
+    margin: 0 5px 0 5px;
+    width: 49%
+}
+.rTable {
+    display: table;
+    width: 100%;
+}
+.rTableRow {
+    display: table-row;
+}
+.rTableRow > div:nth-of-type(1){
+    width:8%;
+}
+.rTableRow > div:nth-of-type(2){
+    width: 16%;
+}
+.rTableRow > div:nth-of-type(3){
+    width: 41%;
+}
+.rTableRow > div:nth-of-type(4){
+    width: 20%;
+}
+.rTableRow > div:nth-of-type(5){
+    width: 15%;
+}
+.prewarning{
+    background: orange;
+}
+.warning{
+    background: rgb(238,117,117) !important;
+}
+.rTableHeading {
+    display: table-header-group;
+    background-color: #ddd;
+    font-weight: 900;
+}
+.rTableCell, .rTableHead {
+    display: table-cell;
+    padding: 3px 10px;
+    border: 1px solid #999999;
+}
+.rTableHeading {
+    display: table-header-group;
+    background-color: rgb(112,112,116);
+    font-weight: bold;
+}
+.rTableFoot {
+    display: table-footer-group;
+    font-weight: bold;
+    background-color: #ddd;
+}
+.rTableBody {
+    display: table-row-group;
+}
+#mensaje-query{
+    margin: 6px auto;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background: inherit;
+    width: 98%;
+}
+.ctrl-costo-results{
+    background: inherit;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 0 auto;
+    width: 98%
+}
+.results{
+    border: 1px solid black;
+    display: block;
+    background: rgb(120, 145, 160);
+    padding: 4px 6px;
+    margin: 2px auto;
+    width: 98%;
+    font-size: 18px;
+}
+.resumen{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: inherit;
+    padding: 8px 6px;
+    margin: 0 auto;
+    width: 98%;
+}
+.titulo-resumen > h3{
+    background: inherit;
+    margin: 0 auto;
+    text-align: center;
+}
+.cantoc{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: inherit;
+    margin: 0 auto;
+    width: 48%;
+}
+.cantoc > p{
+    text-align: center;
+}
+.cantoc > p > span{
+    font-weight: 900;
+}
+.promedio{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: inherit;
+    margin: 0 auto;
+    width: 48%;
+}
+.promedio > p{
+    text-align: center;
+}
+.promedio > p > span{
+    font-weight: 900;
+}
+.left-result{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: inherit;
+    padding: 8px 6px;
+    margin: 0 auto;
+    width: 50%;
+    border: 1px solid rgb(0,89,133);
+    text-align: center;
+}
+
+.right-result{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background: inherit;
+    padding: 8px 6px;
+    margin: 0 auto;
+    width: 50%;
+    border: 1px solid rgb(0,89,133);
+    text-align: center;
+}
+.ctrl-costo-results > div:nth-child(2) > div:nth-child(2) > div:first-child{
+    border-bottom: 1px;
+}
+.ctrl-costo-results > div:nth-child(2) > div:nth-child(2) > div:nth-child(2){
+    border-bottom: 1px;
+}
+.ctrl-costo-results > div:nth-child(2) > div:nth-child(2) > div:first-child > div:first-child > p{
+    font-weight: 700;
+}
+.ctrl-costo-results > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:first-child > p{
+    font-weight: 700;
 }
