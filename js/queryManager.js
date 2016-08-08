@@ -10,7 +10,7 @@ var queryManager = {
                 data: {'codigomat': codigoMaterial},
                 url: 'controllers/admin/ComparaMaterial.php',
                 success: function(response){
-                    var jdata = JSON.parse(decodeURI(response));
+                    var jdata = JSON.parse(response);
                     //window.alert(jdata);
                     //Remueve elementos antes de ejecutar la consulta
                     var node = document.getElementById("contenido-query");
@@ -42,7 +42,7 @@ var queryManager = {
                         wrap.appendChild(wraptOrigen);
 
                         var tiTablaOrigen = document.createElement("h3");
-                        tiTablaOrigen.innerHTML = "TABLA ORIGEN";
+                        tiTablaOrigen.innerHTML = "TABLA COSTO REAL";
                         wraptOrigen.appendChild(tiTablaOrigen);
 
                         var rTable1 = document.createElement("div");
@@ -87,6 +87,8 @@ var queryManager = {
                         var promedio2 = 0;
                         var difCantoc = 0;
                         var difPromedio = 0;
+                        var sumPromReal = 0;
+                        var sumPromOferta = 0;
 
                         for(var i=0; i<jdata[1].length; i++){
                             var filas1 = document.createElement("div");
@@ -101,13 +103,17 @@ var queryManager = {
                             for(var j=0; j<4; j++){
                                 var cols1 = document.createElement("div");
                                 cols1.classList.add("rTableCell");
-                                cols1.innerHTML = jdata[1][i][j];
+                                if(j==3){
+                                    cols1.innerHTML = queryManager.formatNumber(jdata[1][i][j]);
+                                }else{
+                                    cols1.innerHTML = jdata[1][i][j];
+                                }
                                 filas1.appendChild(cols1);
                             }
                             cantoc1 = parseInt(cantoc1) + parseInt(jdata[1][i][2]);
-                            suma1 = parseFloat(suma1) + parseFloat(jdata[1][i][3]);
+                            suma1 = parseInt(suma1) + parseInt(jdata[1][i][3]);
                         }
-                        promedio1 = suma1/(parseFloat(jdata[1].length));
+                        promedio1 = parseInt(suma1/(parseInt(jdata[1].length)));
 
                         //Empieza generación de tabla local
                         var wraptLocal = document.createElement("div");
@@ -115,7 +121,7 @@ var queryManager = {
                         wrap.appendChild(wraptLocal);
 
                         var tiTablaLocal = document.createElement("h3");
-                        tiTablaLocal.innerHTML = "TABLA LOCAL";
+                        tiTablaLocal.innerHTML = "TABLA COSTO OFERTA";
                         wraptLocal.appendChild(tiTablaLocal);
 
                         var rTable2 = document.createElement("div");
@@ -165,34 +171,46 @@ var queryManager = {
                             for(var j=0; j<4; j++){
                                 var cols2 = document.createElement("div");
                                 cols2.classList.add("rTableCell");
-                                cols2.innerHTML = jdata[2][i][j];
+                                if(j==3){
+                                    cols2.innerHTML = queryManager.formatNumber(jdata[2][i][j]);
+                                }else{
+                                    cols2.innerHTML = jdata[2][i][j];
+                                }
                                 filas2.appendChild(cols2);
                             }
                             cantoc2 = parseInt(cantoc2) + parseInt(jdata[2][i][2]);
-                            suma2 = parseFloat(suma2) + parseFloat(jdata[2][i][3]);
+                            suma2 = parseInt(suma2) + parseInt(jdata[2][i][3]);
                         }
-                        promedio2 = suma2/(parseFloat(jdata[2].length));
+                        promedio2 = parseInt(suma2/(parseInt(jdata[2].length)));
                         //Condiciones para marcar
-                        difCantoc = cantoc2 - cantoc1;
-                        difPromedio = promedio2 - promedio1;
+                        difCantoc = parseInt(cantoc1 - cantoc2);
+                        difPromedio = parseInt(promedio1 - promedio2);
+                        sumPromReal = parseInt(promedio1 * cantoc1);
+                        sumPromOferta = parseInt(promedio2 * cantoc2);
 
                         var contCantocOrigen = document.getElementById("cantoc-origen");
-                        contCantocOrigen.innerHTML = cantoc1;
+                        contCantocOrigen.innerHTML = queryManager.formatNumber(cantoc1);
 
                         var contPromOrigen = document.getElementById("prom-origen");
-                        contPromOrigen.innerHTML = promedio1;
+                        contPromOrigen.innerHTML = queryManager.formatNumber(promedio1);
 
                         var contCantocLocal = document.getElementById("cantoc-local");
-                        contCantocLocal.innerHTML = cantoc2;
+                        contCantocLocal.innerHTML = queryManager.formatNumber(cantoc2);
 
                         var contPromLocal = document.getElementById("prom-local");
-                        contPromLocal.innerHTML = promedio2;
+                        contPromLocal.innerHTML = queryManager.formatNumber(promedio2);
 
                         var contDiffOC = document.getElementById("diff-cant-oc");
-                        contDiffOC.innerHTML = difCantoc;
+                        contDiffOC.innerHTML = queryManager.formatNumber(difCantoc);
 
                         var contDiffProm = document.getElementById("diff-prom-val");
-                        contDiffProm.innerHTML = difPromedio;
+                        contDiffProm.innerHTML = queryManager.formatNumber(difPromedio);
+
+                        var contSumPromReal = document.getElementById("sumprom-total-real");
+                        contSumPromReal.innerHTML = queryManager.formatNumber(sumPromReal);
+
+                        var contSumPromOferta = document.getElementById("sumprom-total-oferta");
+                        contSumPromOferta.innerHTML = queryManager.formatNumber(sumPromOferta);
 
                         if(difCantoc < 0 && cantoc2!=0){
                             var cantocWarn = document.getElementById("cantoc-diff");
@@ -206,9 +224,6 @@ var queryManager = {
 
                         }
 
-                        //wrap.innerHTML = jdata[1][0][3];
-
-                        //wrap.innerHTML = jdata[2];
                         result.classList.remove("anim-out");
                         result.classList.add("anim-in");
                         wrap.classList.remove("anim-out");
@@ -219,7 +234,36 @@ var queryManager = {
         }
 
     },
-    controlCostoPrimera: function(){
+    formatNumber: function(numero){
+        // Variable que contendra el resultado final
+       var resultado = "";
 
+       // Si el numero empieza por el valor "-" (numero negativo)
+       if(numero.toString().substring(0,1)=="-"){
+           // Cogemos el numero eliminando los posibles puntos que tenga, y sin
+           // el signo negativo
+           nuevoNumero=numero.toString().replace(/\./g,'').substring(1);
+       }else{
+           // Cogemos el numero eliminando los posibles puntos que tenga
+           nuevoNumero=numero.toString().replace(/\./g,'');
+       }
+
+       // Si tiene decimales, se los quitamos al numero
+        if(numero.toString().indexOf(",")>=0) nuevoNumero=nuevoNumero.substring(0,nuevoNumero.indexOf(","));
+
+        // Ponemos un punto cada 3 caracteres
+        for (var j, i = nuevoNumero.length - 1, j = 0; i >= 0; i--, j++) resultado = nuevoNumero.charAt(i) + ((j > 0) && (j % 3 == 0)? ".": "") + resultado;
+
+        // Si tiene decimales, se lo añadimos al numero una vez forateado con
+        // los separadores de miles
+        if(numero.toString().indexOf(",")>=0) resultado+=numero.toString().substring(numero.indexOf(","));
+
+        if(numero.toString().substring(0,1)=="-"){
+
+            return "-"+resultado;
+        }
+        else{
+            return resultado;
+        }
     }
 }

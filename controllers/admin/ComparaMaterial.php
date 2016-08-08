@@ -5,7 +5,7 @@
     $codigomat = $_POST["codigomat"];
     $conn = mysqli_connect("localhost","cominerp2016","_ERP_COMIN16_","erpcomin");
     mysqli_set_charset($conn,"utf8");
-    //$codigomat = "101010006";
+    //$codigomat = "107170012";
 
     $query = "SELECT codigoprodserv,descpprodserv,cantidadoc,valunitarionetoorigen FROM ".$tablasel." WHERE codigoprodserv='".$codigomat."'";
 
@@ -51,6 +51,8 @@
             $dataLocal[] = $row2;
             unset($row2);
 	}
+
+    //echo $dataOriginal[1][1];
 
     $returned = array($fieldnames, $dataOriginal,$dataLocal);
 
