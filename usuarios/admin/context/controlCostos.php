@@ -20,11 +20,23 @@
                     ?>
                 </select>
             </div>
-            <div class="boton-carga">
-                <button>Cargar Tabla Costo Real</button>
+            <div class="boton-cargar">
+                <form>
+                    <input type="file" class="inputfile" id="carga-excelreal" onchange="queryManager.getFileReal(this);"/>
+                    <label for="carga-excelreal">
+                        <img src="img/MSExcel_2013_logo.svg" />
+                        <span>Carga Tabla Costo Real</span>
+                    </label>
+                </form>
             </div>
-            <div class="boton-carga">
-                <button>Cargar Tabla Costo Real</button>
+            <div class="boton-cargar">
+                <form>
+                    <input type="file" class="inputfile" id="carga-exceloferta" />
+                    <label for="carga-exceloferta">
+                        <img src="img/MSExcel_2013_logo.svg" />
+                        <span>Carga Tabla Costo Oferta</span>
+                    </label>
+                </form>
             </div>
         </div>
         <div class="tabla1">

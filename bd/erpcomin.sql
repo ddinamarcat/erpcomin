@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-08-2016 a las 17:24:25
+-- Tiempo de generación: 10-08-2016 a las 00:57:18
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 7.0.8
 
@@ -21,6 +21,62 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `erpcomin` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `erpcomin`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bckp_oclocal`
+--
+
+DROP TABLE IF EXISTS `bckp_oclocal`;
+CREATE TABLE IF NOT EXISTS `bckp_oclocal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codigoprodserv` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `descpprodserv` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cantidadoc` int(11) DEFAULT NULL,
+  `valunitarionetoorigen` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `bckp_ordendecompra`
+--
+
+DROP TABLE IF EXISTS `bckp_ordendecompra`;
+CREATE TABLE IF NOT EXISTS `bckp_ordendecompra` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `empresa` int(11) DEFAULT NULL,
+  `division` int(11) DEFAULT NULL,
+  `unidad` int(11) DEFAULT NULL,
+  `corroc` int(11) DEFAULT NULL,
+  `numoc` int(11) DEFAULT NULL,
+  `usuarioproc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fechaprococ` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `monedaorigen` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `monedalocal` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rutproveedor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nombreproveedor` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `estado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lineaoc` int(11) DEFAULT NULL,
+  `codigoprodserv` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `descpprodserv` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `um` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cantidadoc` float DEFAULT NULL,
+  `cantrecepcionada` float DEFAULT NULL,
+  `cantdevuelta` float DEFAULT NULL,
+  `cantporrecepcionar` float DEFAULT NULL,
+  `usuarioaprobacionoc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fechaaprobacionoc` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `valunitarionetoorigen` int(11) DEFAULT NULL,
+  `valtotalnetolocal` int(11) DEFAULT NULL,
+  `numpedidocompra` int(11) DEFAULT NULL,
+  `lineapedido` int(11) DEFAULT NULL,
+  `codigo` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `gpo` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 

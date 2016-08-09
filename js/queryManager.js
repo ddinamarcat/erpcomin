@@ -1,5 +1,29 @@
 var queryManager = {
+    getFileReal: function(obj){
+        document.getElementById("carga-excelreal").click();
+        var file = obj.value;
+        var fileName = file.split("\\");
+        window.alert(obj);
 
+        if(obj!=''){
+            var ajaxRequest = $.ajax({
+                type: "POST",
+                data: {'filename': fileName},
+                url: 'controllers/admin/UploadFile.php',
+                success: function(response, status){
+                    window.alert("La BD fue actualizada");
+                }
+            })
+        }
+    },
+    sub: function(obj){
+        var file = obj.value;
+        var fileName = file.split("\\");
+        window.alert(fileName);
+        /*document.getElementById("yourBtn").innerHTML = fileName[fileName.length-1];
+        document.myForm.submit();
+        event.preventDefault();*/
+    },
     getTable : function(){
         var material = document.getElementById("query-material1");
         var codigoMaterial = material.options[material.selectedIndex].value;
