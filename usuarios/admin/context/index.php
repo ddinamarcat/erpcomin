@@ -25,6 +25,7 @@ include_once('controllers/admin/Consulta.php');
     <script type="text/javascript" src="js/responsive.js"></script>
     <!-- Script para cambiar opcion de carga de la query -->
     <script type="text/javascript" src="js/queryManager.js"></script>
+    <script type="text/javascript" src="js/uploadManager.js"></script>
     <script type="text/javascript" src="js/selectManager.js"></script>
     <!-- Script para volver arriba -->
 	<script type="text/javascript" src="js/move-top.js"></script>

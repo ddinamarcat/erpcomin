@@ -1,9 +1,63 @@
 var queryManager = {
-    getFileReal: function(obj){
+    getFileReal: function(){
+        /*
+        obj.preventDefault;
+        var file = obj.files;
+        var stringName = obj.value;
+        var nameVector = stringName.split("\\");
+        var name = nameVector[nameVector.length-1];*/
+
+        //var dataForm = new FormData();
+
+        //dataForm.append('userfile', file);
+        //dataForm.append('filename', name);
+        var codigoCualquiera = 3245;
+
+        var ajaxRequest = $.ajax({
+            type: "POST",
+            data: {'codigon': codigoCualquiera },
+            url: 'controllers/admin/UploadFile.php',
+            success: function(response){
+
+            }
+        });
+
+
+        /*var output = [];
+        for(i=0; i < files.length; i++){
+            output.push(files[i].name,files[i].type);
+        }
+
+        window.alert(output[0]);*/
+        /*var formData = new FormData();
+        // Loop through each of the selected files.
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+
+            // Check the file type.
+            if(file.type.match('application/vnd.ms-excel') || file.type.match('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')){
+                //window.alert("Es Excel");
+            } else{
+                //window.alert("No es excel");
+            }
+
+            // Add the file to the request.
+            formData.append('archivo[]', file, file.name);
+        }
+
+        console.log(JSON.stringify(archivo));*/
+        /*
         document.getElementById("carga-excelreal").click();
-        var file = obj.value;
-        var fileName = file.split("\\");
-        window.alert(obj);
+        var file = obj.files;
+        var formData = new FormData();
+        formData.append('archivo', file, file.name);
+
+
+
+        var nameString = obj.value;
+        var fileName = nameString.split("\\");
+        window.alert(file);
 
         if(obj!=''){
             var ajaxRequest = $.ajax({
@@ -14,7 +68,7 @@ var queryManager = {
                     window.alert("La BD fue actualizada");
                 }
             })
-        }
+        }*/
     },
     sub: function(obj){
         var file = obj.value;

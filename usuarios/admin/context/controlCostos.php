@@ -21,12 +21,13 @@
                 </select>
             </div>
             <div class="boton-cargar">
-                <form>
-                    <input type="file" class="inputfile" id="carga-excelreal" onchange="queryManager.getFileReal(this);"/>
+                <form id="file-form-real" action="controllers/admin/UploadFile.php" method="POST" enctype="multipart/form-data" >
+                    <input type="file" class="inputfile" id="carga-excelreal" name="carga-excelreal" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
                     <label for="carga-excelreal">
                         <img src="img/MSExcel_2013_logo.svg" />
                         <span>Carga Tabla Costo Real</span>
                     </label>
+                    <button type="submit" id="upload-button" >Carga Excel Real</button>
                 </form>
             </div>
             <div class="boton-cargar">

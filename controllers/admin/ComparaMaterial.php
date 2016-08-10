@@ -1,5 +1,6 @@
 <?php
-    include_once("MostrarTabla.php");
+include_once("MostrarTabla.php");
+if(isset($_POST["codigomat"])){
     $tablasel = "ordendecompra";
     $tablasel2 = "oclocal";
     $codigomat = $_POST["codigomat"];
@@ -25,13 +26,13 @@
 
 
     while($resultados = mysqli_fetch_array($consulta)){
-            $row = array();
-            for($i=0; $i<$num_cols; $i++){
-                $row[] = utf8_decode($resultados[$i]);
-            }
-            $dataOriginal[] = $row;
-            unset($row);
-	}
+        $row = array();
+        for($i=0; $i<$num_cols; $i++){
+            $row[] = utf8_decode($resultados[$i]);
+        }
+        $dataOriginal[] = $row;
+        unset($row);
+    }
 
 
     $query2 = "SELECT codigoprodserv,descpprodserv,cantidadoc,valunitarionetoorigen FROM ".$tablasel2." WHERE codigoprodserv='".$codigomat."'";
@@ -44,13 +45,13 @@
     $dataLocal = array();
 
     while($resultados2 = mysqli_fetch_array($consulta2)){
-            $row2 = array();
-            for($i=0; $i<$num_cols2; $i++){
-                $row2[] = utf8_decode($resultados2[$i]);
-            }
-            $dataLocal[] = $row2;
-            unset($row2);
-	}
+        $row2 = array();
+        for($i=0; $i<$num_cols2; $i++){
+            $row2[] = utf8_decode($resultados2[$i]);
+        }
+        $dataLocal[] = $row2;
+        unset($row2);
+    }
 
     //echo $dataOriginal[1][1];
 
@@ -59,4 +60,5 @@
     MostrarTabla::muestraConsulta($returned);
     mysqli_close($conn);
     unset($returned);
+}
 ?>

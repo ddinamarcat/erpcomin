@@ -283,7 +283,7 @@ span.menu{
     color: rgb(35, 35, 35);
     padding:0px 0;
     font-size: 30px;
-    margin: 0px auto 5px auto;
+    margin: 35px auto 5px auto;
 }
 .grid-content > div{
     width: 1280px;
@@ -326,6 +326,7 @@ span.menu{
 .grid-content > div:nth-of-type(1) > div:nth-child(2) > div:nth-child(2){
     margin-right: 40px;
 }
+
 .boton-cargar{
     border: 1px solid black;
 }
