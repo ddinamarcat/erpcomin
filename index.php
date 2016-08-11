@@ -5,6 +5,7 @@
     include_once('config.php');
     include_once('lib/BddMySql.php');
     include_once("lib/Usuario.php");
+    include_once("lib/SanearString.php");
     include_once("controllers/admin/Consulta.php");
     include_once("controllers/admin/MostrarTabla.php");
     include_once("controllers/admin/Select.php");

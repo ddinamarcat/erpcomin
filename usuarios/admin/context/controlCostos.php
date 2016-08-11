@@ -27,7 +27,7 @@
                         <img src="img/MSExcel_2013_logo.svg" />
                         <span>Carga Tabla Costo Real</span>
                     </label>
-                    <button type="submit" id="upload-button" >Carga Excel Real</button>
+                    <button type="submit" class="u-button" id="upload-button" >Actualizar Tabla BD</button>
                 </form>
             </div>
             <div class="boton-cargar">
@@ -37,6 +37,7 @@
                         <img src="img/MSExcel_2013_logo.svg" />
                         <span>Carga Tabla Costo Oferta</span>
                     </label>
+                    <button type="submit" class="u-button" id="upload-button2" >Actualizar Tabla BD</button>
                 </form>
             </div>
         </div>

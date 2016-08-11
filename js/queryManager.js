@@ -261,8 +261,8 @@ var queryManager = {
                         }
                         promedio2 = parseInt(suma2/(parseInt(jdata[2].length)));
                         //Condiciones para marcar
-                        difCantoc = parseInt(cantoc1 - cantoc2);
-                        difPromedio = parseInt(promedio1 - promedio2);
+                        difCantoc = parseInt(cantoc2 - cantoc1);
+                        difPromedio = parseInt(promedio2 - promedio1);
                         sumPromReal = parseInt(promedio1 * cantoc1);
                         sumPromOferta = parseInt(promedio2 * cantoc2);
 

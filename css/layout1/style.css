@@ -311,10 +311,10 @@ span.menu{
 }
 /* Menu Drop Down */
 .grid-content > div:nth-of-type(1) > div:nth-child(2) > div:first-child{
-    margin-right: 216px;
+    margin-right: 50px;
 }
 .grid-content > div:nth-of-type(1) > div:nth-child(2) > div:first-child > select{
-    font-size: 17px;
+    font-size: 14px;
     cursor: pointer;
     transition: 0.6s;
 }
@@ -324,30 +324,54 @@ span.menu{
 }
 /* Boton de la izquierda */
 .grid-content > div:nth-of-type(1) > div:nth-child(2) > div:nth-child(2){
-    margin-right: 40px;
+    margin-right: 180px;
 }
 
 .boton-cargar{
     border: 1px solid black;
+    width: 215px;
+    height: 59px;
+    background: rgb(255,221,0);
 }
+
 .boton-cargar > form > label{
     display: block;
-    padding: 4px 10px;
+    position: relative;
+    padding: 0px 4px;
     transition: 0.6s;
+    z-index: 45;
+    bottom: 29px;
 }
 .boton-cargar > form > label:hover{
     transition: 0.6s;
     background: rgb(150,120,0);
 }
 .inputfile {
-    opacity: 0;
+    opacity: 1;
     overflow: hidden;
-    position: absolute;
-    z-index: -1;
+    display: block;
+    position: relative;
+    left: 58px;
+    z-index: 1;
+}
+.u-button{
+    cursor: pointer;
+    position: relative;
+    display: block;
+    bottom: 29px;
+    padding: 4px 6px;
+    margin: 0 auto;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.6;
+}
+.u-button:hover{
+    transition: 0.6s;
+    background: rgb(150,120,0);
 }
 .inputfile + label{
-    font-size: 1.0rem;
-    font-weight: 700;
+    font-size: 0.95rem;
+    font-weight: 600;
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
@@ -356,8 +380,8 @@ span.menu{
     background: rgb(255,221,0);
 }
 .boton-cargar > form > label > img{
-    width: 36px;
-    height: 35px;
+    width: 22px;
+    height: 21px;
     display: inline-block;
     vertical-align: middle;
 }

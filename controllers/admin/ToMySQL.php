@@ -35,16 +35,33 @@ class ToMySQL{
             }
         }
     }
-    public function limpiarTablaBD(){
+    public function eliminarTablaBD($tableName){
         if($this->conn){
-            $this->sql = "TRUNCATE erpcomin.ordendecompra";
-
+            $this->sql = "DROP TABLE ".$tableName;
             if (mysqli_query($this->conn, $this->sql)) {
-                echo "La tabla erpcomin.ordendecompra ha sido Truncada <br><br>";
+                echo "La tabla ha sido Eliminada <br><br>";
             } else {
-                echo "Error: no se ha truncado la tabla <br><br>" . mysqli_error($this->conn);
+                echo "Error: no se ha eliminado la tabla <br><br>" . mysqli_error($this->conn);
             }
 
+        }
+    }
+    // Para tablas sin id
+    public function crearTablaBD($headers, $typeData,$tableName){
+        if($this->conn){
+            $this->sql = "CREATE TABLE IF NOT EXISTS ".$tableName."(
+              id INT(11) NOT NULL AUTO_INCREMENT,";
+            for($i=0; $i<count($headers); $i++){
+                $this->sql .= $headers[$i]." ".$typeData[$i]." DEFAULT NULL,";
+            }
+            $this->sql .= "PRIMARY KEY(id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
+            echo $this->sql;
+            /*
+            if (mysqli_query($this->conn, $this->sql)) {
+                echo "La tabla ha sido Eliminada <br><br>";
+            } else {
+                echo "Error: no se ha eliminado la tabla <br><br>" . mysqli_error($this->conn);
+            }*/
         }
     }
 
