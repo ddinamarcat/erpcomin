@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-08-2016 a las 00:55:06
+-- Tiempo de generación: 12-08-2016 a las 18:23:31
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 7.0.8
 
@@ -25,67 +25,11 @@ USE `erpcomin`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `bckp_oclocal`
+-- Estructura de tabla para la tabla `costooferta`
 --
 
-DROP TABLE IF EXISTS `bckp_oclocal`;
-CREATE TABLE IF NOT EXISTS `bckp_oclocal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `codigoprodserv` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `descpprodserv` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cantidadoc` int(11) DEFAULT NULL,
-  `valunitarionetoorigen` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `bckp_ordendecompra`
---
-
-DROP TABLE IF EXISTS `bckp_ordendecompra`;
-CREATE TABLE IF NOT EXISTS `bckp_ordendecompra` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `empresa` int(11) DEFAULT NULL,
-  `division` int(11) DEFAULT NULL,
-  `unidad` int(11) DEFAULT NULL,
-  `corroc` int(11) DEFAULT NULL,
-  `numoc` int(11) DEFAULT NULL,
-  `usuarioproc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fechaprococ` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `monedaorigen` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `monedalocal` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rutproveedor` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `nombreproveedor` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `estado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lineaoc` int(11) DEFAULT NULL,
-  `codigoprodserv` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `descpprodserv` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `um` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cantidadoc` float DEFAULT NULL,
-  `cantrecepcionada` float DEFAULT NULL,
-  `cantdevuelta` float DEFAULT NULL,
-  `cantporrecepcionar` float DEFAULT NULL,
-  `usuarioaprobacionoc` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `fechaaprobacionoc` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `valunitarionetoorigen` int(11) DEFAULT NULL,
-  `valtotalnetolocal` int(11) DEFAULT NULL,
-  `numpedidocompra` int(11) DEFAULT NULL,
-  `lineapedido` int(11) DEFAULT NULL,
-  `codigo` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `gpo` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `oclocal`
---
-
-DROP TABLE IF EXISTS `oclocal`;
-CREATE TABLE IF NOT EXISTS `oclocal` (
+DROP TABLE IF EXISTS `costooferta`;
+CREATE TABLE IF NOT EXISTS `costooferta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codigoprodserv` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `descpprodserv` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -95,10 +39,10 @@ CREATE TABLE IF NOT EXISTS `oclocal` (
 ) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Volcado de datos para la tabla `oclocal`
+-- Volcado de datos para la tabla `costooferta`
 --
 
-INSERT INTO `oclocal` (`id`, `codigoprodserv`, `descpprodserv`, `cantidadoc`, `valunitarionetoorigen`) VALUES
+INSERT INTO `costooferta` (`id`, `codigoprodserv`, `descpprodserv`, `cantidadoc`, `valunitarionetoorigen`) VALUES
 (1, '101010006', 'Arnes Paracaidista 4 Argollas', 35, 11235),
 (2, '101010006', 'Arnes Paracaidista 4 Argollas', 50, 12119),
 (3, '101010006', 'Arnes Paracaidista 4 Argollas', 80, 10984),
@@ -128,6 +72,18 @@ INSERT INTO `oclocal` (`id`, `codigoprodserv`, `descpprodserv`, `cantidadoc`, `v
 (27, '96', 'Servicio Maestranzas / Fabricacion Estructuras', 12845, 689),
 (28, '96', 'Servicio Maestranzas / Fabricacion Estructuras', 3453, 376),
 (29, '96', 'Servicio Maestranzas / Fabricacion Estructuras', 2687, 60);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `costoreal`
+--
+
+DROP TABLE IF EXISTS `costoreal`;
+CREATE TABLE IF NOT EXISTS `costoreal` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 

@@ -21,7 +21,7 @@
                 </select>
             </div>
             <div class="boton-cargar">
-                <form id="file-form-real" action="controllers/admin/UploadFile.php" method="POST" enctype="multipart/form-data" >
+                <form id="file-form-real" action="controllers/admin/UploadCostoReal.php" method="POST" enctype="multipart/form-data" >
                     <input type="file" class="inputfile" id="carga-excelreal" name="carga-excelreal" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
                     <label for="carga-excelreal">
                         <img src="img/MSExcel_2013_logo.svg" />
@@ -31,7 +31,7 @@
                 </form>
             </div>
             <div class="boton-cargar">
-                <form>
+                <form id="file-form-oferta" action="controllers/admin/UploadCostoOferta.php" method="POST" enctype="multipart/form-data" >
                     <input type="file" class="inputfile" id="carga-exceloferta" />
                     <label for="carga-exceloferta">
                         <img src="img/MSExcel_2013_logo.svg" />

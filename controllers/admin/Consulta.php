@@ -16,10 +16,10 @@ class Consulta{
         include("config.php");
 
         if($this->conn){
-            $this->sql = "SELECT codigoprodserv,descpprodserv FROM ordendecompra GROUP BY codigoprodserv ORDER BY descpprodserv";
+            $this->sql = "SELECT codigoproductoservicio,descripcionproductoservicio FROM erpcomin.costoreal GROUP BY codigoproductoservicio ORDER BY descripcionproductoservicio";
 
             $this->res = mysqli_query($this->conn,$this->sql);
-            
+
             while ($fila = mysqli_fetch_row($this->res)){
                 $temp = array();
                 $temp[0] = utf8_decode($fila[0]);

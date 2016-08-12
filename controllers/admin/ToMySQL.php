@@ -10,9 +10,18 @@ class ToMySQL{
         mysqli_set_charset($this->conn,"utf8");
 	}
 
-    public function insertarDatosSheetOC($datos,$rowMax,$colMax){
+    public function insertarDatosSheetOC($tableName,$headers,$datos,$rowMax,$colMax){
         if($this->conn){
-            $this->sql = "INSERT INTO erpcomin.ordendecompra(empresa,division,unidad,corroc,numoc,usuarioproc,fechaprococ,monedaorigen,monedalocal,rutproveedor,nombreproveedor,estado,lineaoc,codigoprodserv,descpprodserv,um,cantidadoc,cantrecepcionada,cantdevuelta,cantporrecepcionar,usuarioaprobacionoc,fechaaprobacionoc,valunitarionetoorigen,valtotalnetolocal,numpedidocompra,lineapedido,codigo,gpo) VALUES";
+            $this->sql = "INSERT INTO ".$tableName."(";
+            for($i=0; $i<count($headers); $i++){
+                if($i==(count($headers)-1)){
+                    $this->sql .= $headers[$i].") ";
+                }
+                else{
+                    $this->sql .= $headers[$i].",";
+                }
+            }
+            $this->sql .= "VALUES";
             for($i=1; $i<$rowMax; $i++){
                 $this->sql .= "(";
                 for($j=0; $j<$colMax; $j++){
@@ -27,7 +36,6 @@ class ToMySQL{
                 }
             }
 
-
             if (mysqli_query($this->conn, $this->sql)) {
                 echo "Los registros fueron insertados exitosamente <br><br>";
             } else {
@@ -37,7 +45,7 @@ class ToMySQL{
     }
     public function eliminarTablaBD($tableName){
         if($this->conn){
-            $this->sql = "DROP TABLE ".$tableName;
+            $this->sql = "DROP TABLE IF EXISTS ".$tableName;
             if (mysqli_query($this->conn, $this->sql)) {
                 echo "La tabla ha sido Eliminada <br><br>";
             } else {
@@ -55,13 +63,12 @@ class ToMySQL{
                 $this->sql .= $headers[$i]." ".$typeData[$i]." DEFAULT NULL,";
             }
             $this->sql .= "PRIMARY KEY(id) ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
-            echo $this->sql;
-            /*
+
             if (mysqli_query($this->conn, $this->sql)) {
-                echo "La tabla ha sido Eliminada <br><br>";
+                echo "La tabla ha sido CREADA <br><br>";
             } else {
-                echo "Error: no se ha eliminado la tabla <br><br>" . mysqli_error($this->conn);
-            }*/
+                echo "Error: no se ha CREADO la tabla <br><br>" . mysqli_error($this->conn);
+            }
         }
     }
 
