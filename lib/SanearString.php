@@ -14,6 +14,7 @@ function sanear_string($s){
     $s = str_replace(" ","",$s);
     $s = str_replace("ñ","n",$s);
     $s = str_replace("Ñ","N",$s);
+    $s = str_replace(".","",$s);
 
     $s = preg_replace('/[^a-zA-Z0-9_.-]/', '', $s);
     return $s;

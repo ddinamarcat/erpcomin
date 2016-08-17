@@ -32,7 +32,7 @@
             </div>
             <div class="boton-cargar">
                 <form id="file-form-oferta" action="controllers/admin/UploadCostoOferta.php" method="POST" enctype="multipart/form-data" >
-                    <input type="file" class="inputfile" id="carga-exceloferta" />
+                    <input type="file" class="inputfile" id="carga-exceloferta" name="carga-exceloferta" />
                     <label for="carga-exceloferta">
                         <img src="img/MSExcel_2013_logo.svg" />
                         <span>Carga Tabla Costo Oferta</span>

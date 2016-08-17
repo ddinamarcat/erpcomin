@@ -1,5 +1,5 @@
 <?php
-include_once("ExcelToPHPReal.php");
+include_once("ExcelToPHP.php");
 
 $target_dir = "../../docs/costo_real/";
 
@@ -12,7 +12,7 @@ $tipo_archivo = $_FILES['carga-excelreal']['type'];
 $tamano_archivo = $_FILES['carga-excelreal']['size'];
 $msgArray = array();
 
-if(strpos($nameLower,'planilla gestión de compras')==false){
+if(strpos($nameLower,'planilla gestión de compras')===false){
     $msg = "El archivo NO corresponde a la Planilla de Gesti&oacute;n de Compras";
     echo json_encode($msg, JSON_UNESCAPED_UNICODE);
 }else{
