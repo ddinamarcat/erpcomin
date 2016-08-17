@@ -25,8 +25,6 @@ function insertExcelReal($inputFileName){
     $finalRow = $objPHPExcel->getSheetByName($dataSheet)->getHighestRow();
     $finalCol = $objPHPExcel->getSheetByName($dataSheet)->getHighestColumn();
 
-
-
     $rangeColumns = MyReadFilter::createColumnsArray($startCol,$finalCol);
 
     $colMax = count($rangeColumns);
@@ -130,6 +128,7 @@ function insertExcelReal($inputFileName){
     }
 
 
+
     // Documentacion: Se imprime el array
     /*
     for($i=0; $i<$finalRow; $i++){
@@ -140,9 +139,9 @@ function insertExcelReal($inputFileName){
     }*/
 
     /*
-    $insertSQL = new ToMySQL();
 
-    $sheetDataSQL = $insertSQL->prepararQuery($sheetData,$finalRow,$colMax);*/
+
+    */
 
 
     // Documentacion
@@ -153,11 +152,13 @@ function insertExcelReal($inputFileName){
         echo "<br>";
     }*/
 
-    /*
+    $insertSQL = new ToMySQL();
     $insertSQL->eliminarTablaBD($BDtableName);
 
     $insertSQL->crearTablaBD($wellHeaders,$typeData,$BDtableName);
 
+
+    $sheetDataSQL = $insertSQL->prepararQuery($sheetData,$finalRow,$colMax);
 
     $insertSQL->insertarDatosSheetOC($BDtableName,$wellHeaders,$sheetData,$finalRow,$colMax);
 
@@ -165,7 +166,7 @@ function insertExcelReal($inputFileName){
 
     $msg = "Excel correctamente vaciado en la base de datos.";
 
-    return $msg;*/
+    return $msg;
 
 }
 

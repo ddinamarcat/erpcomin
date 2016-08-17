@@ -21,7 +21,7 @@ class ToMySQL{
                     $this->sql .= $headers[$i].",";
                 }
             }
-            $this->sql .= "VALUES";
+            $this->sql .= " VALUES";
             for($i=1; $i<$rowMax; $i++){
                 $this->sql .= "(";
                 for($j=0; $j<$colMax; $j++){
@@ -35,6 +35,7 @@ class ToMySQL{
                     $this->sql .= ",";
                 }
             }
+
 
             if (mysqli_query($this->conn, $this->sql)) {
                 echo "Los registros fueron insertados exitosamente <br><br>";

@@ -34,14 +34,14 @@ class MyReadFilter implements PHPExcel_Reader_IReadFilter{
         $letters = range('A','Z');
         $subletters = range('A',$secondLetterUltimaCol);
 
+
         if($largoPrimeraCol==1){
-            if($ultimaCol==1){
-                $columns = range($primeraCol,$ultimaCol);
-                return $columns;
+            if($largoUltimaCol==1){
+                $columns = range($primeraCol, $ultimaCol);
             }elseif($largoUltimaCol==2){
-                $columns = $letters;
+                $columns = range($primeraCol,'Z');
                 for($i=0; $i<count($subletters); $i++){
-                    array_push($columns,"A".$subletters[$i]);
+                    array_push($columns,$firstLetterUltimaCol.$subletters[$i]);
                 }
             }
         } else{
