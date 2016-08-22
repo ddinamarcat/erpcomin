@@ -11,7 +11,9 @@ function insertExcelReal($inputFileName){
     $startRow = 1;
     $startCol = 'A';
     $dataSheet = "Orden de Compra";
-    $BDtableName = "erpcomin.costoreal";
+    $BD = "erpcomin";
+    $table = "costoreal";
+    $BDtableName = $BD.".".$table;
 
     $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
 
@@ -153,6 +155,9 @@ function insertExcelReal($inputFileName){
     }*/
 
     $insertSQL = new ToMySQL();
+
+    $insertSQL->backupTable($BD,$table);
+
     $insertSQL->eliminarTablaBD($BDtableName);
 
     $insertSQL->crearTablaBD($wellHeaders,$typeData,$BDtableName);
@@ -174,7 +179,9 @@ function insertExcelOferta($inputFileName){
     $startRow = 1;
     $startCol = 'A';
     $dataSheet = "PU";
-    $BDtableName = "erpcomin.costooferta";
+    $BD = "erpcomin";
+    $table = "costooferta";
+    $BDtableName = $BD.".".$table;
 
     $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
 
@@ -231,11 +238,14 @@ function insertExcelOferta($inputFileName){
                     //echo "Fila: ".$i." - ".$objPHPExcel->getSheetByName($dataSheet)->getCell('A'.$i)->getValue()."<br>";
                     $row = array();
                     for($j=0; $j<$colMax; $j++){
-                        array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
+                        if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue()==NULL){
+                            array_push($row, "NULL");
+                        }else{
+                            array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
+                        }
                         if($j==1){
                             $j = $j + 1;
                         }
-
                     }
                     array_push($sheetData,$row);
                     unset($row);
@@ -245,15 +255,18 @@ function insertExcelOferta($inputFileName){
         }
     }
 
-
+    unset($finalRow);
     $colMax = $colMax - 1;
+    $finalRow = count($sheetData);
 
-    for($i=0; $i<count($sheetData); $i++){
+    // Imprimir dataSheet
+    /*
+    for($i=0; $i<$finalRow; $i++){
         for($j=0; $j<$colMax; $j++){
             echo $sheetData[$i][$j]." ";
         }
         echo "<br>";
-    }
+    }*/
 
     // Constructing headers well formed, without spaces and rare characters
     $wellHeaders = array();
@@ -266,42 +279,19 @@ function insertExcelOferta($inputFileName){
         unset($temp);
         unset($temp2);
     }
-    for($i=0; $i<count($wellHeaders); $i++){
+    // Se imprimen los headers
+    /*for($i=0; $i<count($wellHeaders); $i++){
         echo $wellHeaders[$i]." ";
-    }
-
-    $testCol = 0;
-    $testRow = 0;
-
-    $typeData = ['VARCHAR(255)','VARCHAR(255)','VARCHAR(255)','FLOAT','INT','FLOAT'];
-
-
-
-
-
-    // Documentacion: Se imprime el array
-    /*
-    for($i=0; $i<$finalRow; $i++){
-        for($j=0; $j<$colMax; $j++){
-            echo $sheetData[$i][$j]." ";
-        }
-        echo "<br>";
     }*/
 
 
+    $typeData = ['VARCHAR(255)','VARCHAR(255)','VARCHAR(255)','FLOAT','FLOAT','FLOAT'];
 
 
 
-    // Documentacion
-    /*for($i=1; $i<$finalRow; $i++){
-        for($j=0; $j<$colMax; $j++){
-            echo $sheetDataSQL[$i][$j]." ";
-        }
-        echo "<br>";
-    }*/
-
-    /*
     $insertSQL = new ToMySQL();
+
+    $insertSQL->backupTable($BD,$table);
 
     $sheetDataSQL = $insertSQL->prepararQuery($sheetData,$finalRow,$colMax);
 
@@ -315,7 +305,7 @@ function insertExcelOferta($inputFileName){
 
     $msg = "Excel correctamente vaciado en la base de datos.";
 
-    return $msg;*/
+    return $msg;
 
 }
 

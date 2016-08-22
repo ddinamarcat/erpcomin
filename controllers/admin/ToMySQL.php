@@ -10,6 +10,33 @@ class ToMySQL{
         mysqli_set_charset($this->conn,"utf8");
 	}
 
+    public function backupTable($BD,$table){
+        $tableData = $BD.".".$table;
+        if($this->conn){
+            $this->eliminarTablaBD($BD.".bckp_".$table);
+            $this->sql = "CREATE TABLE ".$BD.".bckp_".$table." LIKE ".$tableData;
+
+            if (mysqli_query($this->conn, $this->sql)) {
+                $success = true;
+                echo "La Tabla de Respaldo fue creada exitosamente<br><br>";
+            } else {
+                $success = false;
+                echo "Error: no se cre&oacute; la tabla de respaldo <br><br>" . mysqli_error($this->conn);
+            }
+
+            $this->sql = "INSERT INTO ".$BD.".bckp_".$table." SELECT * FROM ".$tableData;
+
+            if (mysqli_query($this->conn, $this->sql)) {
+                $success = true;
+                echo "Los datos fueron insertados exitosamente en la tabla de respaldo<br><br>";
+            } else {
+                $success = false;
+                echo "Error: NO se insertaron los registros en la tabla de respaldo <br><br>" . mysqli_error($this->conn);
+            }
+        }
+        return $success;
+    }
+
     public function insertarDatosSheetOC($tableName,$headers,$datos,$rowMax,$colMax){
         if($this->conn){
             $this->sql = "INSERT INTO ".$tableName."(";
@@ -22,17 +49,50 @@ class ToMySQL{
                 }
             }
             $this->sql .= " VALUES";
-            for($i=1; $i<$rowMax; $i++){
-                $this->sql .= "(";
-                for($j=0; $j<$colMax; $j++){
-                    if($j==$colMax-1){
-                        $this->sql .= "'".utf8_encode($datos[$i][$j])."')";
-                    }else{
-                        $this->sql .= "'".utf8_encode($datos[$i][$j])."',";
+            if($tableName == 'erpcomin.costoreal'){
+                for($i=1; $i<$rowMax; $i++){
+                    $this->sql .= "(";
+                    for($j=0; $j<$colMax; $j++){
+                        if($j==$colMax-1){
+                            if($datos[$i][$j]=="NULL"){
+                                $this->sql .= utf8_encode($datos[$i][$j]).")";
+                            }else{
+                                $this->sql .= "'".utf8_encode($datos[$i][$j])."')";
+                            }
+                        }else{
+                            if($datos[$i][$j]=="NULL"){
+                                $this->sql .= utf8_encode($datos[$i][$j]).",";
+                            }else{
+                                $this->sql .= "'".utf8_encode($datos[$i][$j])."',";
+                            }
+                        }
+                    }
+                    if($i!=$rowMax-1){
+                        $this->sql .= ",";
                     }
                 }
-                if($i!=$rowMax-1){
-                    $this->sql .= ",";
+
+            }elseif($tableName == 'erpcomin.costooferta'){
+                for($i=0; $i<$rowMax; $i++){
+                    $this->sql .= "(";
+                    for($j=0; $j<$colMax; $j++){
+                        if($j==$colMax-1){
+                            if($datos[$i][$j]=="NULL"){
+                                $this->sql .= utf8_encode($datos[$i][$j]).")";
+                            }else{
+                                $this->sql .= "'".utf8_encode($datos[$i][$j])."')";
+                            }
+                        }else{
+                            if($datos[$i][$j]=="NULL"){
+                                $this->sql .= utf8_encode($datos[$i][$j]).",";
+                            }else{
+                                $this->sql .= "'".utf8_encode($datos[$i][$j])."',";
+                            }
+                        }
+                    }
+                    if($i!=$rowMax-1){
+                        $this->sql .= ",";
+                    }
                 }
             }
 
@@ -80,7 +140,7 @@ class ToMySQL{
             }
         }
 
-        return $datos;
+        //return $datos;
     }
 
     public function closeConnBD(){
