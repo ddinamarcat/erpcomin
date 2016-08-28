@@ -338,25 +338,30 @@ function toTable1608($inputFileName){
     $row = array();
     $sheetData = array();
     $contador = 0;
-
+    $token = false;
 
     for($i=1; $i<$finalRow+1; $i++){
-        //echo ($i+1)."<br>";
-        $posicion = $i+1;
-        echo $i.": ".$objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posicion)->getValue()."<br>";
-        if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$i)->getValue()=="CATEGORIA"){
-            $row = array();
-            for($j=0; $j<$colMax; $j++){
-                //array_push($row, $objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
-                if($i<$finalRow+1){
-                    //echo $objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue()." ";
+        $posSgte = $i + 1;
+        if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$i)->getValue()=="CATEGORIA" || $token===true){
+            if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posSgte)->getValue()!=NULL){
+                $row = array();
+                if($token===true){
+                    for($j=0; $j<$colMax; $j++){
+                        array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
+
+                    }
+                }else{
+                    $token = true;
+                    $i = $i + 1;
+                    for($j=0; $j<$colMax; $j++){
+                        array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
+
+                    }
                 }
-                /*
-                if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$i)->getValue()=="NULL"){
-                    echo "1 NULL<br>";
-                }*/
+            }else{
+                $token = false;
             }
-            echo "<br>";
+
             if(!empty($row)){
                 array_push($sheetData,$row);
                 unset($row);
@@ -364,55 +369,14 @@ function toTable1608($inputFileName){
         }
     }
 
-    /*
+
     for($i=0; $i<count($sheetData); $i++){
         for($j=0; $j<$colMax; $j++){
             echo $sheetData[$i][$j]." ";
         }
         echo "<br>";
-    }*/
-}
-
-function test($inputFileName){
-    $startRow = 1;
-    $startCol = 'A';
-    $dataSheet = "Hoja1";
-    $BD = "erpcomin";
-    $table = "costooferta";
-    $BDtableName = $BD.".".$table;
-
-    $target_dir = "../../docs/";
-
-    $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-
-    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-
-    $objReader->setReadDataOnly(true);
-    $objReader->setLoadSheetsOnly($dataSheet);
-
-    $objPHPExcel = $objReader->load($inputFileName);
-
-    $finalRow = 4;
-    //$finalCol = $objPHPExcel->getSheetByName($dataSheet)->getHighestColumn();
-    $finalCol = 'D';
-
-
-    $rangeColumns = MyReadFilter::createColumnsArray($startCol,$finalCol);
-
-    $colMax = count($rangeColumns);
-    $row = array();
-    $sheetData = array();
-
-    for($i=1; $i<$finalRow+1; $i++){
-        for($j=0; $j<$colMax; $j++){
-            if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue()==NULL){
-                echo "1 NULL";
-            }
-            //echo $objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue()." ";
-        }
-        echo "<br>";
     }
-
 }
+
 
 ?>
