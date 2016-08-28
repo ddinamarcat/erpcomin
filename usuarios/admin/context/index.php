@@ -85,6 +85,9 @@ include_once('controllers/admin/Consulta.php');
                     <li class="no-actual main-menu-element" templateId="c-graficos" mark="1">
                         <a href="#">Gr&aacute;ficos</a>
                     </li>
+                    <li class="no-actual main-menu-element" templateId="c-upload" mark="1">
+                        <a href="#">Actualizar BD</a>
+                    </li>
                 </div>
             </nav>
         </div>
@@ -115,6 +118,9 @@ include_once('controllers/admin/Consulta.php');
 </template>
 <template id="tc-graficos">
 	<?php include_once("usuarios/admin/context/graficos.php"); ?>
+</template>
+<template id="tc-upload">
+	<?php include_once("usuarios/admin/context/upload.php"); ?>
 </template>
 
 <a href="#to-top" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>

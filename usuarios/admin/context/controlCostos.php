@@ -6,11 +6,27 @@
         </div>
         <div>
             <div>
+                <select name="markcontrato" id="query-contrato" onchange="queryManager.getContrato();">
+                    <?php
+                        $query1 = new Consulta();
+                        $contrato = $query1->mostrarContratos();
+                        $largo1 = count($contrato);
+                        echo "<li><option value=''>--</option></li>";
+                        for($i=0; $i<$largo1; $i++){
+                            echo "<li><option value='".$contrato[$i][0]."'> ".$contrato[$i][0]." --".$contrato[$i][1]."</option></li>";
+                        }
+                    ?>
+                </select>
+            </div>
+            <div id="menu-gpomat-rem">
+
+            </div>
+            <div id="menu-material">
                 <select name="markquery" id="query-material1" onchange="queryManager.getTable();">
                     <?php
 
-                        $query = new Consulta();
-                        $prodServ = $query->mostrarProdServ();
+                        $query2 = new Consulta();
+                        $prodServ = $query2->mostrarProdServ();
                         $largo = count($prodServ);
                         echo "<li><option value=''>--</option></li>";
                         for($i=0; $i<$largo; $i++){
@@ -19,26 +35,6 @@
 
                     ?>
                 </select>
-            </div>
-            <div class="boton-cargar">
-                <form id="file-form-real" action="controllers/admin/UploadCostoReal.php" method="POST" enctype="multipart/form-data" >
-                    <input type="file" class="inputfile" id="carga-excelreal" name="carga-excelreal" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-                    <label for="carga-excelreal">
-                        <img src="img/MSExcel_2013_logo.svg" />
-                        <span>Carga Tabla Costo Real</span>
-                    </label>
-                    <button type="submit" class="u-button" id="upload-button" >Actualizar Tabla BD</button>
-                </form>
-            </div>
-            <div class="boton-cargar">
-                <form id="file-form-oferta" action="controllers/admin/UploadCostoOferta.php" method="POST" enctype="multipart/form-data" >
-                    <input type="file" class="inputfile" id="carga-exceloferta" name="carga-exceloferta" />
-                    <label for="carga-exceloferta">
-                        <img src="img/MSExcel_2013_logo.svg" />
-                        <span>Carga Tabla Costo Oferta</span>
-                    </label>
-                    <button type="submit" class="u-button" id="upload-button2" >Actualizar Tabla BD</button>
-                </form>
             </div>
         </div>
         <div class="tabla1">

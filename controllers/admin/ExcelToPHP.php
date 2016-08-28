@@ -306,6 +306,112 @@ function insertExcelOferta($inputFileName){
     $msg = "Excel correctamente vaciado en la base de datos.";
 
     return $msg;
+}
+
+function toTable1608($inputFileName){
+    $startRow = 1;
+    $startCol = 'C';
+    $dataSheet = "Hoja1";
+    $BD = "erpcomin";
+    $table = "costooferta";
+    $BDtableName = $BD.".".$table;
+
+    $target_dir = "../../docs/";
+
+    $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+
+    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+
+    $objReader->setReadDataOnly(true);
+    $objReader->setLoadSheetsOnly($dataSheet);
+
+    $objPHPExcel = $objReader->load($inputFileName);
+
+    $finalRow = 137;
+    //$finalCol = $objPHPExcel->getSheetByName($dataSheet)->getHighestColumn();
+    $finalCol = 'G';
+
+
+    $rangeColumns = MyReadFilter::createColumnsArray($startCol,$finalCol);
+
+    $colMax = count($rangeColumns);
+    $row = array();
+    $sheetData = array();
+    $contador = 0;
+
+
+    for($i=1; $i<$finalRow+1; $i++){
+        //echo ($i+1)."<br>";
+        $posicion = $i+1;
+        echo $i.": ".$objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posicion)->getValue()."<br>";
+        if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$i)->getValue()=="CATEGORIA"){
+            $row = array();
+            for($j=0; $j<$colMax; $j++){
+                //array_push($row, $objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
+                if($i<$finalRow+1){
+                    //echo $objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue()." ";
+                }
+                /*
+                if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$i)->getValue()=="NULL"){
+                    echo "1 NULL<br>";
+                }*/
+            }
+            echo "<br>";
+            if(!empty($row)){
+                array_push($sheetData,$row);
+                unset($row);
+            }
+        }
+    }
+
+    /*
+    for($i=0; $i<count($sheetData); $i++){
+        for($j=0; $j<$colMax; $j++){
+            echo $sheetData[$i][$j]." ";
+        }
+        echo "<br>";
+    }*/
+}
+
+function test($inputFileName){
+    $startRow = 1;
+    $startCol = 'A';
+    $dataSheet = "Hoja1";
+    $BD = "erpcomin";
+    $table = "costooferta";
+    $BDtableName = $BD.".".$table;
+
+    $target_dir = "../../docs/";
+
+    $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+
+    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+
+    $objReader->setReadDataOnly(true);
+    $objReader->setLoadSheetsOnly($dataSheet);
+
+    $objPHPExcel = $objReader->load($inputFileName);
+
+    $finalRow = 4;
+    //$finalCol = $objPHPExcel->getSheetByName($dataSheet)->getHighestColumn();
+    $finalCol = 'D';
+
+
+    $rangeColumns = MyReadFilter::createColumnsArray($startCol,$finalCol);
+
+    $colMax = count($rangeColumns);
+    $row = array();
+    $sheetData = array();
+
+    for($i=1; $i<$finalRow+1; $i++){
+        for($j=0; $j<$colMax; $j++){
+            if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue()==NULL){
+                echo "1 NULL";
+            }
+            //echo $objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue()." ";
+        }
+        echo "<br>";
+    }
 
 }
 
