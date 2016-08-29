@@ -327,7 +327,8 @@ function toTable1608($inputFileName){
 
     $objPHPExcel = $objReader->load($inputFileName);
 
-    $finalRow = 137;
+    //$finalRow = 912;
+    $finalRow = $objPHPExcel->getSheetByName($dataSheet)->getHighestRow();
     //$finalCol = $objPHPExcel->getSheetByName($dataSheet)->getHighestColumn();
     $finalCol = 'G';
 
@@ -343,19 +344,25 @@ function toTable1608($inputFileName){
     for($i=1; $i<$finalRow+1; $i++){
         $posSgte = $i + 1;
         if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$i)->getValue()=="CATEGORIA" || $token===true){
-            if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posSgte)->getValue()!=NULL){
+            if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posSgte)->getValue()!=NULL || $token ===true){
                 $row = array();
                 if($token===true){
                     for($j=0; $j<$colMax; $j++){
                         array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
-
+                    }
+                    if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posSgte)->getValue()===NULL){
+                        $token = false;
                     }
                 }else{
-                    $token = true;
                     $i = $i + 1;
+                    $posSgte = $i + 1;
                     for($j=0; $j<$colMax; $j++){
                         array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
-
+                    }
+                    if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posSgte)->getValue()!=NULL){
+                        $token = true;
+                    }else{
+                        $token = false;
                     }
                 }
             }else{
@@ -369,13 +376,40 @@ function toTable1608($inputFileName){
         }
     }
 
-
+    /*
     for($i=0; $i<count($sheetData); $i++){
         for($j=0; $j<$colMax; $j++){
             echo $sheetData[$i][$j]." ";
         }
         echo "<br>";
+    }*/
+
+    $objPHPExcel->getProperties()->setCreator("COMIN")
+                             ->setLastModifiedBy("29-08-2016")
+                             ->setTitle("PU")
+                             ->setSubject("PU_1608")
+                             ->setDescription("Planilla obtenida desde reporte")
+                             ->setKeywords("PU_codigos")
+                             ->setCategory("Tabla_PU_Informe15");
+
+    for($i=0; $i<count($sheetData); $i++){
+        for($j=0; $j<$colMax; $j++){
+            //echo $rangeColumns[$j].($i+1).": ".$sheetData[$i][$j]." ";
+
+            $objPHPExcel->setActiveSheetIndex(0)
+                        ->setCellValue($rangeColumns[$j].($i+1), $sheetData[$i][$j]);
+
+        }
     }
+
+    header('Content-Type: application/vnd.ms-excel');
+    //header('Content-Disposition: attachment;filename="listproduct.xls"');
+    header ('Cache-Control: cache, must-revalidate');
+    header ('Pragma: public');
+
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+    $objWriter->save($target_dir."/PU_1608.xls");
+
 }
 
 
