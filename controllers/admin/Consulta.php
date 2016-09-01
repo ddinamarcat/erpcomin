@@ -8,8 +8,7 @@ class Consulta{
     public $prodServ = array(); //Array con prodCod y con prodServ
 
     public function __construct(){
-        include("config.php");
-        $this->conn = mysqli_connect($hostdb,$userdb,$passdb,$namedb);
+        $this->conn = mysqli_connect("localhost","cominerp2016","_ERP_COMIN16_","erpcomin");
         mysqli_set_charset($this->conn,"utf8");
 	}
 
@@ -38,7 +37,7 @@ class Consulta{
 
     public function IngresarContrato($codigo,$nombre){
         if($this->conn){
-            $this->sql = "INSERT INTO erpcomin.contrato(codigo,nombre) VALUES('".$codigo."','".$nombre."')";
+            $this->sql = "INSERT INTO erpcomin.contrato(codigo,nombre) VALUES('".utf8_encode($codigo)."','".utf8_encode($nombre)."')";
             $this->res = mysqli_query($this->conn,$this->sql);
             if($this->res == false){
                 echo("Error description: " . mysqli_error($this->conn));
@@ -49,7 +48,18 @@ class Consulta{
 
         }
     }
-
+    public function RemoverContrato($codigo){
+        if($this->conn){
+            $this->sql = "DELETE FROM erpcomin.contrato WHERE codigo='".$codigo."'";
+            $this->res = mysqli_query($this->conn,$this->sql);
+            if($this->res == false){
+                echo("Error description: " . mysqli_error($this->conn));
+            }else{
+                echo("Se ha eliminado exitosamente el contrato");
+                mysqli_close($this->conn);
+            }
+        }
+    }
     public function mostrarProdServ(){
         include("config.php");
 
@@ -60,8 +70,8 @@ class Consulta{
 
             while ($fila = mysqli_fetch_row($this->res)){
                 $temp = array();
-                $temp[0] = utf8_decode($fila[0]);
-                $temp[1] = utf8_decode($fila[1]);
+                $temp[0] = utf8_encode($fila[0]);
+                $temp[1] = utf8_encode($fila[1]);
                 array_push($this->prodServ,$temp);
                 unset($temp);
 

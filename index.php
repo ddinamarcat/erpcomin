@@ -9,7 +9,6 @@
     include_once("lib/Usuario.php");
     include_once("lib/SanearString.php");
     include_once("controllers/admin/Consulta.php");
-    include_once("controllers/admin/IngresarContrato.php");
     include_once("controllers/admin/MostrarTabla.php");
     include_once("controllers/admin/ComparaMaterial.php");
     include_once("controllers/admin/CheckSerialize.php");

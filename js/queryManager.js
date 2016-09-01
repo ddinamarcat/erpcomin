@@ -4,16 +4,166 @@ var queryManager = {
         var fileName = file.split("\\");
         window.alert(fileName);
     },
-    getContrato: function(){
+    getArea: function(){
+        var qm = queryManager;
+        qm.limpiaParent("upload-materiales");
+        qm.limpiaParent("upld-buttons");
+
         var contrato = document.getElementById("bdcontrato");
+        var nombre = contrato.options[contrato.selectedIndex].innerHTML;
         var codContrato = contrato.options[contrato.selectedIndex].value;
-        window.alert(codContrato);
+
+        if(codContrato){
+            var wrap = document.getElementById("upload-materiales");
+
+            var cont = document.createElement("div");
+            cont.classList.add("left-col");
+            cont.classList.add("left-col2");
+            wrap.appendChild(cont);
+
+            var h1 = document.createElement("h2");
+            h1.innerHTML = "Seleccione un &aacute;rea (Materiales y Servicios, o Remuneraciones): ";
+            cont.appendChild(h1);
+
+            var sp = document.createElement("span");
+            sp.innerHTML = nombre;
+            h1.appendChild(sp);
+
+            var sel = document.createElement("select");
+            sel.setAttribute("name","markarea");
+            sel.id = "bdarea";
+            sel.setAttribute("onchange","queryManager.getMateriales("+codContrato+");");
+            cont.appendChild(sel);
+
+            var optDef = document.createElement("option");
+            optDef.value = "";
+            optDef.innerHTML = "--";
+            sel.appendChild(optDef);
+
+            var opt1 = document.createElement("option");
+            opt1.value = "1";
+            opt1.innerHTML = "1 --Materiales y Servicios";
+            sel.appendChild(opt1);
+
+            var opt2 = document.createElement("option");
+            opt2.value = "2";
+            opt2.innerHTML = "2 --Remuneraciones";
+            sel.appendChild(opt2);
+
+            cont.classList.remove("anim-in");
+            cont.classList.add("anim-out");
+            window.setTimeout(function(){
+                cont.classList.remove("anim-out");
+                cont.classList.add("anim-in");
+            },400)
+
+        }
+
+    },
+    getMateriales: function(codigo){
+        var qm = queryManager;
+        qm.limpiaParent("upld-buttons");
+
+        var bdarea = document.getElementById("bdarea");
+        var areaVal = bdarea.options[bdarea.selectedIndex].value;
+
+        if(areaVal!=false){
+            var wrap = document.getElementById("upld-buttons");
+            //Boton carga excel costo real
+            var cont1 = document.createElement("div");
+            cont1.classList.add("left-col");
+            cont1.classList.add("boton-cargar");
+            wrap.appendChild(cont1);
+
+            var form1 = document.createElement("form");
+            form1.id = "file-form-real";
+            form1.method = "POST";
+            form1.enctype = "multipart/form-data";
+            cont1.appendChild(form1);
+
+            var inp1 = document.createElement("input");
+            inp1.type = "file";
+            inp1.classList.add("inputfile");
+            inp1.id = "carga-excelreal";
+            inp1.name = "carga-excelreal";
+            inp1.accept = "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            form1.appendChild(inp1);
+
+            var lbl1 = document.createElement("label");
+            lbl1.htmlFor = "carga-excelreal";
+            form1.appendChild(lbl1);
+
+            var img1 = document.createElement("img");
+            img1.src = "img/MSExcel_2013_logo.svg";
+            lbl1.appendChild(img1);
+
+            var txbtn1 = document.createElement("span");
+            txbtn1.innerHTML = "Carga Archivo Costo Real";
+            lbl1.appendChild(txbtn1);
+
+            var sbBtn = document.createElement("button");
+            sbBtn.type = "submit";
+            sbBtn.classList = "u-button";
+            sbBtn.id = "ubutton-real";
+            sbBtn.setAttribute("onClick","uploadManager.sendReal();");
+            sbBtn.innerHTML = "Actualizar BD";
+            form1.appendChild(sbBtn);
+            //Boton upload excel tabla costo oferta
+            var cont2 = document.createElement("div");
+            cont2.classList.add("right-col");
+            cont2.classList.add("boton-cargar");
+            wrap.appendChild(cont2);
+
+            var form2 = document.createElement("form");
+            form2.id = "file-form-oferta";
+            form2.action = "controllers/admin/UploadCostoOferta.php";
+            form2.method = "POST";
+            form2.enctype = "multipart/form-data";
+            cont2.appendChild(form2);
+
+            var inp2 = document.createElement("input");
+            inp2.type = "file";
+            inp2.classList.add("inputfile");
+            inp2.id = "carga-exceloferta";
+            inp2.name = "carga-exceloferta";
+            inp2.accept = "application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            form2.appendChild(inp2);
+
+            var lbl2 = document.createElement("label");
+            lbl2.htmlFor = "carga-exceloferta";
+            form2.appendChild(lbl2);
+
+            var img2 = document.createElement("img");
+            img2.src = "img/MSExcel_2013_logo.svg";
+            lbl2.appendChild(img2);
+
+            var txbtn2 = document.createElement("span");
+            txbtn2.innerHTML = "Carga Archivo Costo Oferta";
+            lbl2.appendChild(txbtn2);
+
+            var sbBtn2 = document.createElement("button");
+            sbBtn2.type = "submit";
+            sbBtn2.classList = "u-button";
+            sbBtn2.id = "ubutton-oferta";
+            sbBtn2.innerHTML = "Actualizar BD";
+            form2.appendChild(sbBtn2);
+
+            wrap.classList.remove("anim-in");
+            wrap.classList.add("anim-out");
+            window.setTimeout(function(){
+                wrap.classList.remove("anim-out");
+                wrap.classList.add("anim-in");
+            },400);
+
+        }
+
+
     },
     getTable : function(){
         var material = document.getElementById("query-material1");
         var codigoMaterial = material.options[material.selectedIndex].value;
 
-        if(codigoMaterial!=''){ //Para no haga nada con la primera opcion
+        if(codigoMaterial!=''){ //Para que no haga nada con la primera opcion
             var ajaxRequest= $.ajax({
                 type: "POST",
                 data: {'codigomat': codigoMaterial},
@@ -274,5 +424,19 @@ var queryManager = {
         else{
             return resultado;
         }
+    },
+    limpiaParent: function(contenedor){
+        var node = document.getElementById(contenedor);
+        while (document.getElementById(contenedor).hasChildNodes()){              // selected elem has children
+            if (node.hasChildNodes()){                // current node has children
+                node = node.lastChild;                 // set current node to child
+            }
+            else{                                     // last child found
+                //console.log(node.nodeName);
+                node = node.parentNode;                // set node to parent
+                node.removeChild(node.lastChild);      // remove last node
+            }
+        }
     }
+
 }

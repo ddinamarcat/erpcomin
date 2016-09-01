@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ERP COMIN</title>
+    <title>Sistema COMIN</title>
     <!-- Favicon -->
     <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
 	<!-- jQuery min 2.2.1 -->
@@ -45,7 +45,7 @@
     <div>
         <form class="basic-form login-form" method="post" submitId="login-boton" onkeyup="validator.activateSubmit(this)" action="lib/LoginManager.php">
             <div>
-                <h2>ERP ADMINISTRACI&Oacute;N PROYECTOS COMIN</h2>
+                <h2>SISTEMA ADMINISTRACI&Oacute;N PROYECTOS COMIN</h2>
             </div>
             <div>
                 <img src="img/logo.png" alt="logologin"/>

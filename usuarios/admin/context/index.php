@@ -5,7 +5,7 @@ include_once('controllers/admin/Consulta.php');
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ERP Gestion Proyectos COMIN</title>
+	<title>Sistema Gestion Proyectos COMIN</title>
     <!-- Favicon -->
     <link rel="icon" href="img/favicon.ico" type="image/x-icon"/>
 	<!-- jQuery min 2.2.1 -->
@@ -13,7 +13,8 @@ include_once('controllers/admin/Consulta.php');
 	<!-- Vista para dispositivos moviles -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<!-- Codificacion usada -->
-    <meta charset="utf-8"/>
+    <!-- <meta charset="utf-8"/> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<meta http-equiv="Content-Type" content="text/html"/>
 	<!-- Script para cargar context Manager -->
 	<script type="text/javascript" src="js/contextManager.js"></script>
@@ -23,7 +24,7 @@ include_once('controllers/admin/Consulta.php');
     <script type="text/javascript" src="js/rest.js"></script>
     <!-- Carga la hoja estilo correspondiente al dispositivo -->
     <script type="text/javascript" src="js/responsive.js"></script>
-    <!-- Script para cambiar opcion de carga de la query -->
+    <!-- Script para cargar mas Managers -->
     <script type="text/javascript" src="js/queryManager.js"></script>
     <script type="text/javascript" src="js/uploadManager.js"></script>
     <script type="text/javascript" src="js/selectManager.js"></script>
@@ -122,6 +123,14 @@ include_once('controllers/admin/Consulta.php');
 <template id="tc-upload">
 	<?php include_once("usuarios/admin/context/upload.php"); ?>
 </template>
+
+<section id="modal-section" class="modal-hidden fadeout-modal hidden">
+	<div id="modal-div">
+        <img src="img/boton-cerrar.png" alt="Cerrar" class="boton-cerrar" onclick="modalManager.hideModal();"/>
+		<div id="modal-content">
+		</div>
+	</div>
+</section>
 
 <a href="#to-top" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 </body>

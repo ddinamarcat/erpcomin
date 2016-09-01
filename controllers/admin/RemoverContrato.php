@@ -1,6 +1,16 @@
 <?php
+include_once("Consulta.php");
 
-$codigo = $_POST[""]
+
+if (isset($_POST['codigo'])){
+    $codigo = $_POST["codigo"];
+
+    $consulta = new Consulta();
+    $consulta->RemoverContrato($codigo);
+
+}
+
+
 
 
 ?>

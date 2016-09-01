@@ -3,7 +3,7 @@
     <section class="big-row">
         <div class="left-col">
             <h2>Seleccione un contrato:</h2>
-            <select name="markcontrato" id="bdcontrato" onchange="queryManager.getContrato();">
+            <select name="markcontrato" id="bdcontrato" onchange="queryManager.getArea();">
                 <?php
                     $query1 = new Consulta();
                     $contrato = $query1->mostrarContratos();
@@ -37,25 +37,18 @@
                         <label>C&oacute;digo: </label><input type="text" name="codigo" required/>
                     </div>
                     <div>
-                        <label>Nombre: </label><input type="text" name="nombre" required/>
-                    </div>
-                    <div>
                         <button type="submit">Remover de BD</button>
                     </div>
                 </form>
             </div>
         </div>
-    <section>
-    <section class="big-row">
-        <div class="left-col boton-cargar">
-            <form id="file-form-real" action="controllers/admin/toTable1608.php" method="POST" enctype="multipart/form-data" >
-                    <input type="file" class="inputfile" id="report1608-toexcel" name="report1608-toexcel" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
-                    <label for="report1608-toexcel">
-                        <img src="img/MSExcel_2013_logo.svg" />
-                        <span>Carga Archivo</span>
-                    </label>
-                    <button type="submit" class="u-button" id="rep1608" >Generar Excel</button>
-            </form>
-        </div>
+    </section>
+    <section id="upload-materiales" class="big-row lefty">
+
+    </section>
+    <section id="upld-buttons" class="big-row lefty">
+
+    </section>
+    <section id="output-upload" class="big-row">
     </section>
 </section>
