@@ -401,7 +401,7 @@ function toOferta($inputFileName,$contrato){
     return $msg;
 }
 
-function toOferta1608Process($inputFileName,$contrato){
+function toOferta1608Process($inputFileName,$contrato,$area){
     $startRow = 1;
     $startCol = 'C';
     $dataSheet = "Hoja1";
@@ -413,6 +413,7 @@ function toOferta1608Process($inputFileName,$contrato){
 
     $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
 
+
     $objReader = PHPExcel_IOFactory::createReader($inputFileType);
 
     $objReader->setReadDataOnly(true);
@@ -420,9 +421,8 @@ function toOferta1608Process($inputFileName,$contrato){
 
     $objPHPExcel = $objReader->load($inputFileName);
 
-    //$finalRow = 912;
+
     $finalRow = $objPHPExcel->getSheetByName($dataSheet)->getHighestRow();
-    //$finalCol = $objPHPExcel->getSheetByName($dataSheet)->getHighestColumn();
     $finalCol = 'G';
 
 
@@ -434,10 +434,11 @@ function toOferta1608Process($inputFileName,$contrato){
     $contador = 0;
     $token = false;
 
+
     for($i=1; $i<$finalRow+1; $i++){
         $posSgte = $i + 1;
         if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$i)->getValue()=="CATEGORIA" || $token===true){
-            if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posSgte)->getValue()!=NULL || $token ===true){
+            if($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[0].$posSgte)->getValue()!=NULL || $token===true){
                 $row = array();
                 if($token===true){
                     for($j=0; $j<$colMax; $j++){
@@ -469,15 +470,18 @@ function toOferta1608Process($inputFileName,$contrato){
         }
     }
 
-    /*
     for($i=0; $i<count($sheetData); $i++){
-        for($j=0; $j<$colMax; $j++){
-            echo $sheetData[$i][$j]." ";
-        }
-        echo "<br>";
-    }*/
+        array_unshift($sheetData[$i], NULL, NULL);
+        array_push($sheetData[$i],NULL,NULL);
+    }
 
-    $objPHPExcel->getProperties()->setCreator("COMIN")
+    $headers =array("codigooferta","codigoreal","descripcionoferta","unidad","cantidad","costounitario","subtotal","numcentrocosto","centrocosto");
+    array_unshift($sheetData,$headers);
+
+    $objPHPExcel2 = new PHPExcel();
+    $rangeColumns2 = array("A","B","C","D","E","F","G","H","I");
+
+    $objPHPExcel2->getProperties()->setCreator("ERPCOMIN")
                              ->setLastModifiedBy("29-08-2016")
                              ->setTitle("PU")
                              ->setSubject("PU_1608")
@@ -486,22 +490,35 @@ function toOferta1608Process($inputFileName,$contrato){
                              ->setCategory("Tabla_PU_Informe15");
 
     for($i=0; $i<count($sheetData); $i++){
-        for($j=0; $j<$colMax; $j++){
-            //echo $rangeColumns[$j].($i+1).": ".$sheetData[$i][$j]." ";
+        for($j=0; $j<count($rangeColumns2); $j++){
 
-            $objPHPExcel->setActiveSheetIndex(0)
-                        ->setCellValue($rangeColumns[$j].($i+1), $sheetData[$i][$j]);
+            $objPHPExcel2->setActiveSheetIndex(0)
+                        ->setCellValue($rangeColumns2[$j].($i+1), $sheetData[$i][$j]);
 
         }
     }
 
-    //header('Content-Type: application/vnd.ms-excel');
-    //header('Content-Disposition: attachment;filename="listproduct.xls"');
-    //header ('Cache-Control: cache, must-revalidate');
-    //header ('Pragma: public');
 
-    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, $inputFileType);
-    $objWriter->save($target_dir."/1608_lista_items.xlsx");
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel2, $inputFileType);
+    $dataSheet2 = $objPHPExcel2->createSheet(NULL, 0);
+    $dataSheet2 = $objPHPExcel2->getActiveSheet()->setTitle("items");
+
+    $i = 0;
+    $objPHPExcel2->removeSheetByIndex(1);
+
+    if($inputFileType=='Excel5'){
+        $outputFile = "1608_lista_items.xls";
+        $objWriter->save($target_dir.$outputFile);
+    }elseif($inputFileType=='Excel2007'){
+        $outputFile = "1608_lista_items.xlsx";
+        $objWriter->save($target_dir.$outputFile);
+    }
+
+    //Entre estas Lineas implementar eliminacion de duplicados y guardarlos en hoja lista
+
+    //
+
+    toOferta1608($sheetData,$contrato,$area);
 
 }
 
@@ -509,7 +526,40 @@ function toOferta1557Process($inputFileName,$contrato){
 
 }
 
-function toOferta1608($inputFileName,$contrato){
+function toOferta1608($input,$contrato,$area){
+    if(is_string($input)==true){
+        //get $sheetData Array from excel file
+    }
+
+    $BD = "erpcomin";
+    $table = $contrato."costooferta".$area;
+    $BDtableName = $BD.".".$table;
+
+    $headers = array();
+    $headers = $input[0];
+    $colMax = count($headers);
+    $finalRow = count($input);
+    $typeData = ['VARCHAR(255)','VARCHAR(255)','VARCHAR(512)','VARCHAR(255)','FLOAT','FLOAT','FLOAT','INT','VARCHAR(512)'];
+
+
+
+    $insertSQL = new ToMySQL();
+
+    $insertSQL->backupTable($BD,$table);
+
+    $sheetDataSQL = $insertSQL->prepararQuery($input,$finalRow,$colMax);
+
+    $insertSQL->eliminarTablaBD($BDtableName);
+
+    $insertSQL->crearTablaBD($headers,$typeData,$BDtableName);
+
+    $insertSQL->insertarDatosSheetOC($BDtableName,$headers,$sheetDataSQL,$finalRow,$colMax);
+
+    $insertSQL->closeConnBD();
+
+    $msg = "Excel correctamente vaciado en la base de datos.";
+
+    return $msg;
 
 }
 

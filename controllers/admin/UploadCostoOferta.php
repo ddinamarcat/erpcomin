@@ -2,6 +2,19 @@
 include_once("ExcelToPHP.php");
 
 if(isset($_FILES['carga-exceloferta']) && isset($_POST['ct-oferta']) && isset($_POST['mat-oferta'])){
+    switch($_POST['mat-oferta']){
+        case "1":
+            $area = "matserv";
+            break;
+        case "2":
+            $area = "rem";
+            break;
+        default:
+            $msg = "ERROR, no está seteado el material";
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+            break;
+    }
+
     $target_dir_process = "../../docs/costo_oferta/temp/";
     $target_dir = "../../docs/costo_oferta/";
 
@@ -16,13 +29,13 @@ if(isset($_FILES['carga-exceloferta']) && isset($_POST['ct-oferta']) && isset($_
         $nameLower = mb_strtolower($name,'UTF-8');
         $msgArray = array();
 
-        if(strpos($nameLower,'pu')===true){
-            if (move_uploaded_file($archivo,$target_dir.$name)){
+        if(strpos($nameLower,'pu')!=false){
+            if (move_uploaded_file($archivo,$target_dir_process.$name)){
                 $msg = "El archivo <strong>".$name."</strong> ha sido cargado correctamente en el directorio <strong>".$target_dir."</strong>";
                 if($contrato == "1608"){
-                    $msg2 = toOferta1608Process($target_dir_process.$name, $contrato);
+                    $msg2 = toOferta1608Process($target_dir_process.$name, $contrato, $area);
                 }elseif($contrato == "1557"){
-                    $msg2 = toOferta1557Process($target_dir_process.$name, $contrato);
+                    $msg2 = toOferta1557Process($target_dir_process.$name, $contrato, $area);
                 }
                 array_push($msgArray, $msg, $msg2);
                 echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);
@@ -31,13 +44,13 @@ if(isset($_FILES['carga-exceloferta']) && isset($_POST['ct-oferta']) && isset($_
                 array_push($msgArray, $msg);
                 echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);
             }
-        }elseif(strpos($nameLower,'lista_items')===true){
+        }elseif(strpos($nameLower,'lista_items')!=false){
             if (move_uploaded_file($archivo,$target_dir.$name)){
                 $msg = "El archivo <strong>".$name."</strong> ha sido cargado correctamente en el directorio <strong>".$target_dir."</strong>";
                 if($contrato == "1608"){
-                    $msg2 = toOferta1608($target_dir.$name, $contrato);
+                    $msg2 = toOferta1608($target_dir.$name, $contrato, $area);
                 }elseif($contrato == "1557"){
-                    $msg2 = toOferta1557($target_dir.$name, $contrato);
+                    $msg2 = toOferta1557($target_dir.$name, $contrato, $area);
                 }
                 array_push($msgArray, $msg, $msg2);
                 echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);

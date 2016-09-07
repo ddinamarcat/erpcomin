@@ -79,7 +79,7 @@ class ToMySQL{
                     }
                 }
             }elseif(strpos($tableName, 'costooferta')!=false){
-                for($i=0; $i<$rowMax; $i++){
+                for($i=1; $i<$rowMax; $i++){
                     $this->sql .= "(";
                     for($j=0; $j<$colMax; $j++){
                         if($j==$colMax-1){
@@ -145,7 +145,7 @@ class ToMySQL{
                 $datos[$i][$j] = mysqli_real_escape_string($this->conn,$datos[$i][$j]);
             }
         }
-        
+
         return $datos;
     }
 
