@@ -7,12 +7,12 @@ include_once("../../lib/SanearString.php");
 include_once("CheckSerialize.php");
 include_once("ToMySQL.php");
 
-function insertExcelReal($inputFileName){
+function toRealOC($inputFileName,$contrato,$area){
     $startRow = 1;
     $startCol = 'A';
     $dataSheet = "Orden de Compra";
     $BD = "erpcomin";
-    $table = "costoreal";
+    $table = $contrato."costoreal".$area;
     $BDtableName = $BD.".".$table;
 
     $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
@@ -101,7 +101,6 @@ function insertExcelReal($inputFileName){
         $encontrado = NULL;
         $i = 0;
 
-
         while($encontrado!='FLOAT'){
             if($dTypetemp[$i][$j]=='n'){
                 $numChar = strval($objPHPExcel->getSheetByName($dataSheet)->getCell($rangeColumns[$j].$i)->getValue());
@@ -115,9 +114,9 @@ function insertExcelReal($inputFileName){
             }elseif($dTypetemp[$i][$j]=='e'){
                 $encontrado = 'VARCHAR(255)';
             }elseif($dTypetemp[$i][$j]=='b'){
-                $encontrado= 'TINYINT(1)';
+                $encontrado = 'TINYINT(1)';
             }elseif($dTypetemp[$i][$j]=='f'){
-                $encontrado= 'VARCHAR(512)';
+                $encontrado = 'VARCHAR(512)';
             }
             $i = $i + 1;
             if($i == $finalRow){
@@ -154,6 +153,7 @@ function insertExcelReal($inputFileName){
         echo "<br>";
     }*/
 
+
     $insertSQL = new ToMySQL();
 
     $insertSQL->backupTable($BD,$table);
@@ -162,10 +162,9 @@ function insertExcelReal($inputFileName){
 
     $insertSQL->crearTablaBD($wellHeaders,$typeData,$BDtableName);
 
-
     $sheetDataSQL = $insertSQL->prepararQuery($sheetData,$finalRow,$colMax);
 
-    $insertSQL->insertarDatosSheetOC($BDtableName,$wellHeaders,$sheetData,$finalRow,$colMax);
+    $insertSQL->insertarDatosSheetOC($BDtableName,$wellHeaders,$sheetDataSQL,$finalRow,$colMax);
 
     $insertSQL->closeConnBD();
 
@@ -175,12 +174,106 @@ function insertExcelReal($inputFileName){
 
 }
 
-function insertExcelOferta($inputFileName){
+function toRealSC($inputFileName,$contrato,$area){
+    $startRow = 1;
+    $startCol = 'A';
+    $dataSheet = "SC GPO";
+    $BD = "erpcomin";
+    $table = $contrato."costoreal".$area;
+    $BDtableName = $BD.".".$table;
+
+    $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
+
+    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
+
+    $objReader->setReadDataOnly(true);
+    $objReader->setLoadSheetsOnly($dataSheet);
+
+    $objPHPExcel = $objReader->load($inputFileName);
+
+    $finalRow = $objPHPExcel->getSheetByName($dataSheet)->getHighestRow();
+    $finalCol = $objPHPExcel->getSheetByName($dataSheet)->getHighestColumn();
+
+    $rangeColumns = MyReadFilter::createColumnsArray($startCol,$finalCol);
+    $colMax = count($rangeColumns);
+
+
+    $wellHeaders = array("empresa","ndivision","nunidad","correlativooc","nordendecompra","usuarioproceso","fechaprocesooc","monedaorigen","monedalocal","rutproveedor","nombreproveedor","estado","lineaoc","codigoproductoservicio","descripcionproductoservicio","um","cantidadoc","cantidadrecepcionada","cantidaddevuelta","cantidadporrecepcionar","usuarioaprobacionoc","fechaaprobacionoc","valorunitarionetoorigen","valortotalnetolocal","npedidodecompra","lineapedido","codigo","gpo");
+
+    $sheetData = array();
+
+    if($objPHPExcel->getSheetByName($dataSheet)->getCell('B9')->getValue()=="codigoservicio"){
+        for($i=11; $i<$finalRow; $i++){
+            $row = array();
+            $gpo = array();
+            if(is_numeric($objPHPExcel->getSheetByName($dataSheet)->getCell('A'.$i)->getValue())==true ){
+                array_push($row,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+                array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell('B'.$i)->getValue());
+                array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell('C'.$i)->getValue());
+                array_push($row,NULL);
+                array_push($row,1);
+                array_push($row,NULL,NULL,NULL,NULL,NULL);
+                array_push($row,intval($objPHPExcel->getSheetByName($dataSheet)->getCell('K'.$i)->getValue()));
+                array_push($row,1*intval($objPHPExcel->getSheetByName($dataSheet)->getCell('K'.$i)->getValue()));
+                array_push($row,NULL,NULL);
+                array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell('B'.$i)->getValue());
+                array_push($gpo,$objPHPExcel->getSheetByName($dataSheet)->getCell('I'.$i)->getValue());
+                array_push($gpo,$objPHPExcel->getSheetByName($dataSheet)->getCell('J'.$i)->getValue());
+                array_push($row,serialize($gpo));
+                array_push($sheetData,$row);
+                unset($row);
+                unset($gpo);
+            }
+
+        }
+    }else{
+        for($i=11; $i<$finalRow; $i++){
+            $row = array();
+            $gpo = array();
+
+            if(is_numeric($objPHPExcel->getSheetByName($dataSheet)->getCell('A'.$i)->getValue())==true ){
+                array_push($row,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+                array_push($row,$objPHPExcel->getSheetByName($dataSheet)->getCell('B'.$i)->getValue());
+                array_push($row,NULL);
+                array_push($row,1);
+                array_push($row,NULL,NULL,NULL,NULL,NULL);
+                array_push($row,intval($objPHPExcel->getSheetByName($dataSheet)->getCell('J'.$i)->getValue()));
+                array_push($row,1*intval($objPHPExcel->getSheetByName($dataSheet)->getCell('J'.$i)->getValue()));
+                array_push($row,NULL,NULL,NULL);
+                array_push($gpo,$objPHPExcel->getSheetByName($dataSheet)->getCell('H'.$i)->getValue());
+                array_push($gpo,$objPHPExcel->getSheetByName($dataSheet)->getCell('I'.$i)->getValue());
+                array_push($row,serialize($gpo));
+                array_push($sheetData,$row);
+                unset($row);
+                unset($gpo);
+            }
+        }
+    }
+
+
+    $insertSQL = new ToMySQL();
+
+    $insertSQL->backupTable($BD,$table);
+
+    $sheetDataSQL = $insertSQL->prepararQuery($sheetData,count($sheetData),count($wellHeaders));
+
+    $insertSQL->insertarDatosSheetOC($BDtableName,$wellHeaders,$sheetDataSQL,count($sheetData),count($wellHeaders));
+
+    $insertSQL->closeConnBD();
+
+    $msg = "Servicios insertados correctamente en la base de datos.";
+
+    return $msg;
+
+
+}
+
+function toOferta($inputFileName,$contrato){
     $startRow = 1;
     $startCol = 'A';
     $dataSheet = "PU";
     $BD = "erpcomin";
-    $table = "costooferta";
+    $table = $contrato."costooferta";
     $BDtableName = $BD.".".$table;
 
     $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
@@ -308,15 +401,15 @@ function insertExcelOferta($inputFileName){
     return $msg;
 }
 
-function toTable1608($inputFileName){
+function toOferta1608Process($inputFileName,$contrato){
     $startRow = 1;
     $startCol = 'C';
     $dataSheet = "Hoja1";
     $BD = "erpcomin";
-    $table = "costooferta";
+    $table = $contrato."costooferta";
     $BDtableName = $BD.".".$table;
 
-    $target_dir = "../../docs/";
+    $target_dir = "../../docs/costo_oferta/";
 
     $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
 
@@ -402,15 +495,26 @@ function toTable1608($inputFileName){
         }
     }
 
-    header('Content-Type: application/vnd.ms-excel');
+    //header('Content-Type: application/vnd.ms-excel');
     //header('Content-Disposition: attachment;filename="listproduct.xls"');
-    header ('Cache-Control: cache, must-revalidate');
-    header ('Pragma: public');
+    //header ('Cache-Control: cache, must-revalidate');
+    //header ('Pragma: public');
 
-    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
-    $objWriter->save($target_dir."/PU_1608.xls");
+    $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, $inputFileType);
+    $objWriter->save($target_dir."/1608_lista_items.xlsx");
 
 }
 
+function toOferta1557Process($inputFileName,$contrato){
+
+}
+
+function toOferta1608($inputFileName,$contrato){
+
+}
+
+function toOferta1557($inputFileName,$contrato){
+
+}
 
 ?>

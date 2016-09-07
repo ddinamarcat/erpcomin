@@ -11,27 +11,34 @@ class ToMySQL{
 	}
 
     public function backupTable($BD,$table){
-        $tableData = $BD.".".$table;
+        $BDbckp = "bckp_erpcomin_tables";
+        $tableData = $BDbckp.".".$table."_b";
         if($this->conn){
-            $this->eliminarTablaBD($BD.".bckp_".$table);
-            $this->sql = "CREATE TABLE ".$BD.".bckp_".$table." LIKE ".$tableData;
+            //$this->eliminarTablaBD($tableData);
+            $this->sql = "CREATE TABLE ".$tableData." LIKE ".$BD.".".$table;
 
             if (mysqli_query($this->conn, $this->sql)) {
                 $success = true;
                 echo "La Tabla de Respaldo fue creada exitosamente<br><br>";
             } else {
                 $success = false;
-                echo "Error: no se cre&oacute; la tabla de respaldo <br><br>" . mysqli_error($this->conn);
+                echo "Error: no se cre&oacute; la tabla de respaldo <br><br>" . mysqli_error($this->conn)."<br>";
             }
 
-            $this->sql = "INSERT INTO ".$BD.".bckp_".$table." SELECT * FROM ".$tableData;
+            $this->sql = "INSERT INTO ".$tableData." SELECT * FROM ".$BD.".".$table;
 
             if (mysqli_query($this->conn, $this->sql)) {
+                if(mysqli_query($this->conn, "DROP TABLE IF EXISTS ".$BDbckp.".".$table)){
+                    echo "La tabla de respaldo <strong>".$BDbckp.".".$table."</strong> fue eliminada<br>";
+                }
+                if(mysqli_query($this->conn, "RENAME TABLE ".$tableData." TO ".$BDbckp.".".$table)){
+                    echo "La tabla <strong>".$tableData."</strong> fue renombrada a <strong>".$BDbckp.".".$table."</strong><br>";
+                }
                 $success = true;
                 echo "Los datos fueron insertados exitosamente en la tabla de respaldo<br><br>";
             } else {
                 $success = false;
-                echo "Error: NO se insertaron los registros en la tabla de respaldo <br><br>" . mysqli_error($this->conn);
+                echo "Error: NO se insertaron los registros en la tabla de respaldo <br><br>" . mysqli_error($this->conn)."<br>";
             }
         }
         return $success;
@@ -49,7 +56,7 @@ class ToMySQL{
                 }
             }
             $this->sql .= " VALUES";
-            if($tableName == 'erpcomin.costoreal'){
+            if(strpos($tableName, 'costoreal')!=false){
                 for($i=1; $i<$rowMax; $i++){
                     $this->sql .= "(";
                     for($j=0; $j<$colMax; $j++){
@@ -71,8 +78,7 @@ class ToMySQL{
                         $this->sql .= ",";
                     }
                 }
-
-            }elseif($tableName == 'erpcomin.costooferta'){
+            }elseif(strpos($tableName, 'costooferta')!=false){
                 for($i=0; $i<$rowMax; $i++){
                     $this->sql .= "(";
                     for($j=0; $j<$colMax; $j++){
@@ -100,7 +106,7 @@ class ToMySQL{
             if (mysqli_query($this->conn, $this->sql)) {
                 echo "Los registros fueron insertados exitosamente <br><br>";
             } else {
-                echo "Error: no se insertaron los registros <br><br>" . mysqli_error($this->conn);
+                echo "Error: no se insertaron los registros <br><br>" . mysqli_error($this->conn)."<br>";
             }
         }
     }
@@ -110,7 +116,7 @@ class ToMySQL{
             if (mysqli_query($this->conn, $this->sql)) {
                 echo "La tabla ha sido Eliminada <br><br>";
             } else {
-                echo "Error: no se ha eliminado la tabla <br><br>" . mysqli_error($this->conn);
+                echo "Error: no se ha eliminado la tabla <br><br>" . mysqli_error($this->conn)."<br>";
             }
 
         }
@@ -128,7 +134,7 @@ class ToMySQL{
             if (mysqli_query($this->conn, $this->sql)) {
                 echo "La tabla ha sido CREADA <br><br>";
             } else {
-                echo "Error: no se ha CREADO la tabla <br><br>" . mysqli_error($this->conn);
+                echo "Error: no se ha CREADO la tabla <br><br>" . mysqli_error($this->conn)."<br>";
             }
         }
     }
@@ -139,8 +145,8 @@ class ToMySQL{
                 $datos[$i][$j] = mysqli_real_escape_string($this->conn,$datos[$i][$j]);
             }
         }
-
-        //return $datos;
+        
+        return $datos;
     }
 
     public function closeConnBD(){

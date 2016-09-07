@@ -44,10 +44,8 @@
         </div>
     </section>
     <section id="upload-materiales" class="big-row lefty">
-
     </section>
     <section id="upld-buttons" class="big-row lefty">
-
     </section>
     <section id="output-upload" class="big-row">
     </section>

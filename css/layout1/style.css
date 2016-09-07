@@ -422,14 +422,21 @@ span.menu{
     align-self:flex-start;
     border: 1px solid black;
     width: 252px;
-    height: 64px;
+    height: 116px;
     margin: 0 auto;
     background: rgb(255,221,0);
 }
 .boton-cargar > form{
     width: 240px;
 }
-
+.contrato{
+    margin-top: 24px;
+    margin-bottom: -27px;
+}
+label.contrato:hover{
+    transition: 0s !important;
+    background: rgb(255,221,0) !important;
+}
 .boton-cargar > form > label{
     display: block;
     position: relative;

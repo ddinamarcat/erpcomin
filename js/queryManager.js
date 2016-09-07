@@ -42,11 +42,13 @@ var queryManager = {
 
             var opt1 = document.createElement("option");
             opt1.value = "1";
+            opt1.name = "Área: Materiales y Servicios";
             opt1.innerHTML = "1 --Materiales y Servicios";
             sel.appendChild(opt1);
 
             var opt2 = document.createElement("option");
             opt2.value = "2";
+            opt2.name = "Área: Remuneraciones";
             opt2.innerHTML = "2 --Remuneraciones";
             sel.appendChild(opt2);
 
@@ -65,6 +67,7 @@ var queryManager = {
         qm.limpiaParent("upld-buttons");
 
         var bdarea = document.getElementById("bdarea");
+        var areaName = bdarea.options[bdarea.selectedIndex].name;
         var areaVal = bdarea.options[bdarea.selectedIndex].value;
 
         if(areaVal!=false){
@@ -78,8 +81,39 @@ var queryManager = {
             var form1 = document.createElement("form");
             form1.id = "file-form-real";
             form1.method = "POST";
+            form1.action = "controllers/admin/UploadCostoReal.php";
             form1.enctype = "multipart/form-data";
             cont1.appendChild(form1);
+
+            var r1 = document.createElement("input");
+            r1.classList.add("hidden");
+            r1.id = "ct-real";
+            r1.type = "checkbox";
+            r1.name = "ct-real";
+            r1.value = codigo;
+            r1.checked = true;
+            form1.appendChild(r1);
+
+            var r1mat = document.createElement("input");
+            r1mat.classList.add("hidden");
+            r1mat.id = "mat-real";
+            r1mat.type = "checkbox";
+            r1mat.name = "mat-real";
+            r1mat.value = areaVal;
+            r1mat.checked = true;
+            form1.appendChild(r1mat);
+
+            var desc1 = document.createElement("label");
+            desc1.htmlFor = "ct-real";
+            desc1.classList = "contrato";
+            desc1.innerHTML = "Contrato: "+codigo;
+            form1.appendChild(desc1);
+
+            var desc1mat = document.createElement("label");
+            desc1mat.htmlFor = "mat-real";
+            desc1mat.classList = "contrato";
+            desc1mat.innerHTML = areaName;
+            form1.appendChild(desc1mat);
 
             var inp1 = document.createElement("input");
             inp1.type = "file";
@@ -98,14 +132,14 @@ var queryManager = {
             lbl1.appendChild(img1);
 
             var txbtn1 = document.createElement("span");
-            txbtn1.innerHTML = "Carga Archivo Costo Real";
+            txbtn1.innerHTML = "Carga Items Costo Real";
             lbl1.appendChild(txbtn1);
 
             var sbBtn = document.createElement("button");
             sbBtn.type = "submit";
             sbBtn.classList = "u-button";
             sbBtn.id = "ubutton-real";
-            sbBtn.setAttribute("onClick","uploadManager.sendReal();");
+            //sbBtn.setAttribute("onClick","uploadManager.sendReal("+codigo+");");
             sbBtn.innerHTML = "Actualizar BD";
             form1.appendChild(sbBtn);
             //Boton upload excel tabla costo oferta
@@ -120,6 +154,36 @@ var queryManager = {
             form2.method = "POST";
             form2.enctype = "multipart/form-data";
             cont2.appendChild(form2);
+
+            var r2 = document.createElement("input");
+            r2.classList.add("hidden");
+            r2.id = "ct-oferta";
+            r2.type = "radio";
+            r2.name = "ct-oferta";
+            r2.value = codigo;
+            r2.checked = true;
+            form2.appendChild(r2);
+
+            var r2mat = document.createElement("input");
+            r2mat.classList.add("hidden");
+            r2mat.id = "mat-oferta";
+            r2mat.type = "checkbox";
+            r2mat.name = "mat-oferta";
+            r2mat.value = areaVal;
+            r2mat.checked = true;
+            form2.appendChild(r2mat);
+
+            var desc2 = document.createElement("label");
+            desc2.htmlFor = "ct-oferta";
+            desc2.classList = "contrato";
+            desc2.innerHTML = "Contrato: "+codigo;
+            form2.appendChild(desc2);
+
+            var desc2mat = document.createElement("label");
+            desc2mat.htmlFor = "mat-oferta";
+            desc2mat.classList = "contrato";
+            desc2mat.innerHTML = areaName;
+            form2.appendChild(desc2mat);
 
             var inp2 = document.createElement("input");
             inp2.type = "file";
@@ -138,7 +202,7 @@ var queryManager = {
             lbl2.appendChild(img2);
 
             var txbtn2 = document.createElement("span");
-            txbtn2.innerHTML = "Carga Archivo Costo Oferta";
+            txbtn2.innerHTML = "Carga Items Costo Oferta";
             lbl2.appendChild(txbtn2);
 
             var sbBtn2 = document.createElement("button");

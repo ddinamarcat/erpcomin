@@ -1,15 +1,16 @@
 var uploadManager = {
-    sendReal: function(){
+    sendReal: function(contrato){
         var form = document.getElementById("carga-excelreal");
         var nameOr = form.value;
         var splited = nameOr.split("\\");
         var largo = splited.length;
         var name = splited[largo-1];
-        var file = form.files;
+        var file = form.files[0];
         var formData = new FormData();
         formData.append('file', file);
-        formData.append('name', name);
+        formData.append('contrato', contrato);
         //window.alert(name);
+
 
         var ajaxRequest= $.ajax({
               url:"controllers/admin/UploadCostoReal.php",
@@ -19,7 +20,7 @@ var uploadManager = {
               processData:false,
               cache:false,
               success:function(response){
-                  console.log(response);
+                  window.alert(response);
               }
         });
     }

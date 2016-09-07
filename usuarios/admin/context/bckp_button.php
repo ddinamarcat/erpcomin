@@ -56,6 +56,7 @@
     <section id="upld-buttons" class="big-row lefty">
         <div class="left-col boton-cargar">
             <form id="file-form-real" action="controllers/admin/UploadCostoReal.php" method="POST" enctype="multipart/form-data" >
+                    
                     <input type="file" class="inputfile" id="carga-excelreal" name="carga-excelreal" accept="application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
                     <label for="carga-excelreal">
                         <img src="img/MSExcel_2013_logo.svg" />

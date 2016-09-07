@@ -1,31 +1,61 @@
 <?php
 include_once("ExcelToPHP.php");
 
-$target_dir = "../../docs/costo_oferta/";
+if(isset($_FILES['carga-exceloferta']) && isset($_POST['ct-oferta']) && isset($_POST['mat-oferta'])){
+    $target_dir_process = "../../docs/costo_oferta/temp/";
+    $target_dir = "../../docs/costo_oferta/";
 
-$archivo=$_FILES['carga-exceloferta']['tmp_name'];
-$name=$_FILES['carga-exceloferta']['name'];
-$nameLower = mb_strtolower($name,'UTF-8');
-$contrato = intval(substr($nameLower,0,4));
-$nombrearchivo="pu_costo_oferta.xls";
-$tipo_archivo = $_FILES['carga-exceloferta']['type'];
-$tamano_archivo = $_FILES['carga-exceloferta']['size'];
-$msgArray = array();
+    $archivo=$_FILES['carga-exceloferta']['tmp_name'];
+    $name=$_FILES['carga-exceloferta']['name'];
+    $contrato = $_POST['ct-oferta'];
 
-if(strpos($nameLower,'pu editables proyecto cmpc')===false){
-    $msg = "El archivo NO corresponde a la Planilla PU del contrato ".$contrato;
-    echo json_encode($msg, JSON_UNESCAPED_UNICODE);
-}else{
-    if (move_uploaded_file($archivo,$target_dir.$nombrearchivo)){
-    	$msg = "El archivo ha sido cargado correctamente.";
-        $msg2 = insertExcelOferta($target_dir.$nombrearchivo);
-        array_push($msgArray, $msg, $msg2);
-        echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);
+    $cod_name = substr($name,0,4);
+    $contrato = $_POST['ct-oferta'];
+
+    if($cod_name==$contrato){
+        $nameLower = mb_strtolower($name,'UTF-8');
+        $msgArray = array();
+
+        if(strpos($nameLower,'pu')===true){
+            if (move_uploaded_file($archivo,$target_dir.$name)){
+                $msg = "El archivo <strong>".$name."</strong> ha sido cargado correctamente en el directorio <strong>".$target_dir."</strong>";
+                if($contrato == "1608"){
+                    $msg2 = toOferta1608Process($target_dir_process.$name, $contrato);
+                }elseif($contrato == "1557"){
+                    $msg2 = toOferta1557Process($target_dir_process.$name, $contrato);
+                }
+                array_push($msgArray, $msg, $msg2);
+                echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);
+            }else{
+                $msg = "Ocurrió algún error al subir el fichero. No pudo guardarse.";
+                array_push($msgArray, $msg);
+                echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);
+            }
+        }elseif(strpos($nameLower,'lista_items')===true){
+            if (move_uploaded_file($archivo,$target_dir.$name)){
+                $msg = "El archivo <strong>".$name."</strong> ha sido cargado correctamente en el directorio <strong>".$target_dir."</strong>";
+                if($contrato == "1608"){
+                    $msg2 = toOferta1608($target_dir.$name, $contrato);
+                }elseif($contrato == "1557"){
+                    $msg2 = toOferta1557($target_dir.$name, $contrato);
+                }
+                array_push($msgArray, $msg, $msg2);
+                echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);
+            }else{
+                $msg = "Ocurrió algún error al subir el fichero. No pudo guardarse.";
+                array_push($msgArray, $msg);
+                echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);
+            }
+        }else{
+            $msg = "El archivo NO corresponde a la Planilla de Precios Unitarios de Oferta";
+            echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        }
     }else{
-    	$msg = "Ocurrió alg&uacute;n error al subir el fichero. No pudo guardarse.";
-        array_push($msgArray, $msg);
-        echo json_encode($msgArray, JSON_UNESCAPED_UNICODE);
+        echo "El archivo no pertenece al contrato ".$contrato;
     }
+}else{
+    $msg = "No está seteado";
+    echo json_encode($msg, JSON_UNESCAPED_UNICODE);
 }
 
 ?>
