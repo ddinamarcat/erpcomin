@@ -372,6 +372,12 @@ span.menu{
     margin-right: 120px;
 
 }
+.righty{
+    text-align: right;
+}
+.righty > div{
+    margin-left: 120px;
+}
 .right-col{
     width: 630px;
     text-align: center;
@@ -750,4 +756,11 @@ label.contrato:hover{
     height: 550px;
     display: inline-block;
     vertical-align: top;
+}
+.wrap-consulta{
+    height: 29px;
+}
+.wrap-consulta > div{
+    display: block;
+    margin: auto;
 }

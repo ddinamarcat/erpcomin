@@ -1,4 +1,9 @@
 var queryManager = {
+    getContrato: function(){
+        var qm = queryManager;
+        qm.limpiaParent("menu-gpomat-rem");
+        qm.limpiaParent("menu-material");
+    },
     sub: function(obj){
         var file = obj.value;
         var fileName = file.split("\\");

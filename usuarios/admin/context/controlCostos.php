@@ -2,9 +2,9 @@
     <h1>CONTROL DE COSTOS</h1>
     <div>
         <div>
-            <h2>Consulta Conflicto por Materiales</h2>
+            <h2>Consulta Conflicto de Costos</h2>
         </div>
-        <div>
+        <div class="wrap-consulta">
             <div>
                 <select name="markcontrato" id="query-contrato" onchange="queryManager.getContrato();">
                     <?php
@@ -15,11 +15,23 @@
                         for($i=0; $i<$largo1; $i++){
                             echo "<li><option value='".$contrato[$i][0]."'> ".$contrato[$i][0]." --".$contrato[$i][1]."</option></li>";
                         }
+                        echo "<br>";
                     ?>
                 </select>
             </div>
             <div id="menu-gpomat-rem">
-
+                <select name="markcontrato" id="query-contrato" onchange="queryManager.getContrato();">
+                    <?php
+                        $query1 = new Consulta();
+                        $contrato = $query1->mostrarContratos();
+                        $largo1 = count($contrato);
+                        echo "<li><option value=''>--</option></li>";
+                        for($i=0; $i<$largo1; $i++){
+                            echo "<li><option value='".$contrato[$i][0]."'> ".$contrato[$i][0]." --".$contrato[$i][1]."</option></li>";
+                        }
+                        echo "<br>";
+                    ?>
+                </select>
             </div>
             <div id="menu-material">
                 <select name="markquery" id="query-material1" onchange="queryManager.getTable();">

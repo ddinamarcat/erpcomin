@@ -47,6 +47,25 @@
     </section>
     <section id="upld-buttons" class="big-row lefty">
     </section>
-    <section id="output-upload" class="big-row">
+    <section id="output-upload" class="big-row righty">
+        <?php
+            echo "<h3>Descarga de planillas de Mapeo de Oferta</h3>";
+
+            if(file_exists("docs/costo_oferta/1557_lista_items.xlsx")){
+                echo "<a href='docs/costo_oferta/1557_lista_items.xlsx'>Descarga 1557_lista_items.xlsx</a><br>";
+            }elseif(file_exists("docs/costo_oferta/1557_lista_items.xls")){
+                echo "<a href='docs/costo_oferta/1557_lista_items.xlsx'>Descarga 1557_lista_items.xls</a><br>";
+            }else{
+                echo "No existe planilla de oferta del contrato 1557<br>";
+            }
+
+            if(file_exists("docs/costo_oferta/1608_lista_items.xlsx")){
+                echo "<a href='docs/costo_oferta/1608_lista_items.xlsx'>Descarga 1608_lista_items.xlsx</a><br>";
+            }elseif(file_exists("docs/costo_oferta/1608_lista_items.xls")){
+                echo "<a href='docs/costo_oferta/1608_lista_items.xls'>Descarga 1608_lista_items.xls</a><br>";
+            }else{
+                echo "No existe planilla de oferta del contrato 1608<br>";
+            }
+        ?>
     </section>
 </section>
